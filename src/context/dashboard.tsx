@@ -55,7 +55,6 @@ export const DashboardProvider: ParentComponent = (props) => {
 }
 
 export function useDashboardStateContext() {
-    if (DashboardStateContext) {
-        return useContext(DashboardStateContext)
-    }
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    return useContext(DashboardStateContext)!
 }
