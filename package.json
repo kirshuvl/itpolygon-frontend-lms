@@ -1,0 +1,51 @@
+{
+    "name": "itpolygon-frontend-lms",
+    "version": "0.0.0",
+    "private": "true",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite --host 0.0.0.0",
+        "server": "vite server",
+        "start": "vite",
+        "typecheck": "tsc --noEmit",
+        "typecheck:watch": "tsc --noEmit --watch",
+        "check:code": "npx @biomejs/biome check src --log-kind=compact --verbose",
+        "check:code:fix": "npx @biomejs/biome check . --apply",
+        "lint": "npm run lint:code && lint:styles",
+        "lint:fix": "npm run lint:code:fix &&lint:styles:fix",
+        "lint:code": "npx @biomejs/biome lint src --log-kind=compact --verbose",
+        "lint:code:fix": "npx @biomejs/biome lint src --apply-unsafe --log-kind=compact --verbose",
+        "lint:styles": "stylelint **/*.{scss,css}",
+        "lint:styles:fix": "stylelint **/*.{scss,css} --fix"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.6.3",
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "clsx": "^2.1.0",
+        "itpolygon-ui-dev": "^0.0.41",
+        "sass": "^1.72.0",
+        "solid-devtools": "^0.29.3",
+        "stylelint": "^16.3.1",
+        "stylelint-config-standard-scss": "^13.0.0",
+        "stylelint-order": "^6.0.4",
+        "stylelint-scss": "^6.2.1",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.11",
+        "vite-plugin-copy": "^0.1.6",
+        "vite-plugin-solid": "^2.8.2"
+    },
+    "dependencies": {
+        "@solidjs/router": "^0.13.1",
+        "axios": "^1.6.8",
+        "immer": "^10.0.4",
+        "jwt-decode": "^4.0.0",
+        "mathjax": "^3.2.2",
+        "solid-form-handler": "^1.2.3",
+        "solid-js": "^1.8.11",
+        "vite-plugin-static-copy": "^1.0.5",
+        "yup": "^1.4.0"
+    }
+}

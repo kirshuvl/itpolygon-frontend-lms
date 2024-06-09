@@ -1,0 +1,67 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+    "files": {
+        "include": ["*.tsx", "*.ts", "*.js", "*.json"],
+        "ignore": ["./dist", "./node_modules", "*.d.ts"]
+    },
+    "vcs": {
+        "defaultBranch": "main",
+        "useIgnoreFile": true
+    },
+    "organizeImports": {
+        "enabled": true
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 108
+    },
+    "javascript": {
+        "formatter": {
+            "semicolons": "asNeeded",
+            "quoteStyle": "single",
+            "trailingComma": "all",
+            "enabled": true,
+            "jsxQuoteStyle": "double",
+            "arrowParentheses": "always"
+        }
+    },
+    "linter": {
+        "ignore": ["*.scss", "*.md", "*.svg", "*.d.ts"],
+        "enabled": true,
+        "rules": {
+            "all": true,
+            "complexity": {
+                "noForEach": "off",
+                "useOptionalChain": "warn",
+                "useLiteralKeys": "off"
+            },
+            "correctness": {
+                "useHookAtTopLevel": "off"
+            },
+            "a11y": {
+                "useHeadingContent": "off",
+                "useKeyWithClickEvents": "off",
+                "useKeyWithMouseEvents": "off",
+                "useAnchorContent": "off",
+                "useValidAnchor": "off",
+                "useMediaCaption": "off",
+                "useAltText": "off",
+                "useButtonType": "off",
+                "noRedundantAlt": "off",
+                "noSvgWithoutTitle": "off"
+            },
+            "style": {
+                "useBlockStatements": "off",
+                "noImplicitBoolean": "off",
+                "useNamingConvention": "off",
+                "noDefaultExport": "off"
+            },
+            "suspicious": {
+                "noConsoleLog": "off",
+                "noAssignInExpressions": "off"
+            }
+        }
+    }
+}

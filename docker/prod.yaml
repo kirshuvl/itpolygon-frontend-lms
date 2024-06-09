@@ -1,0 +1,8 @@
+services:
+  frontend:
+    build: 
+      context: ..
+      dockerfile: DockerfileProd
+    container_name: lms
+    ports:
+      - "3000:3000"

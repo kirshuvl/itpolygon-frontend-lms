@@ -1,0 +1,36 @@
+name: Frontend Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Check Application
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: npm i
+
+    - name: Install CI checks
+      run: npm ci
+
+    - name: Check Types
+      run: npm run typecheck
+
+    - name: Lint with Biome
+      run: npm run check:code
+
+    - name: Lint Styles
+      run: npm run lint:styles
+
+    - name: Lint Code
+      run: npm run lint:code
+
+    - name: Test Production Build
+      run: npm run build
+

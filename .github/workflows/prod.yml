@@ -1,0 +1,20 @@
+name: Frontend Docker [Production]
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build Docker Container
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Make Production Application in Docker
+      run: make production
+
+    - name: Check Docker Container
+      run: make check
