@@ -56,7 +56,8 @@
                 "useBlockStatements": "off",
                 "noImplicitBoolean": "off",
                 "useNamingConvention": "off",
-                "noDefaultExport": "off"
+                "noDefaultExport": "off",
+                "useFilenamingConvention": "off"
             },
             "suspicious": {
                 "noConsoleLog": "off",
