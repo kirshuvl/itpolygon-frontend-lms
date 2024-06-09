@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    background-color: var(--white);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    color: var(--black) !important;
+    align-items: center;
+
+    img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+}
