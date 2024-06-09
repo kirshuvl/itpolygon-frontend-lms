@@ -1,0 +1,53 @@
+@import "../../styles/animations";
+
+.card {
+    display: flex;
+    background-color: var(--white);
+    border: 1px solid var(--slate-200);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--slate-100);
+    }
+
+    .icon {
+        display: flex;
+        background-color: var(--slate-200);
+        height: 7rem;
+        aspect-ratio: 1 / 1;
+        border-radius: inherit;
+        justify-content: center;
+        align-items: center;
+        font-size: 3.75rem;
+        line-height: 3.75rem;
+        font-weight: 500;
+
+        img {
+            height: 7rem;
+            border-radius: inherit;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0.25rem 0;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .line {
+        display: flex;
+        gap: 0.5rem;
+
+        .title {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            font-weight: 500;
+        }
+    }
+}
