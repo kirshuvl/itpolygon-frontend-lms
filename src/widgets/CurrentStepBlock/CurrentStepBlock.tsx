@@ -1,5 +1,6 @@
 import { TitleBlock } from 'itpolygon-ui-dev'
 import { type Component, Match, Show, Switch } from 'solid-js'
+import { ProblemStep } from '../../components/Steps/ProblemStep/ProblemStep'
 import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
 import { TextStep } from '../../components/Steps/TextStep/TextStep'
 import { VideoStep } from '../../components/Steps/VideoStep/VideoStep'
@@ -13,7 +14,7 @@ export const CurrentStepBlock: Component = () => {
     return (
         <>
             <TitleBlock
-                title={lesson()?.title ?? 'Нет заголовка'}
+                title={currentStep()?.title ?? 'Нет заголовка'}
                 loading={lesson.loading}
                 fallback={<TopicBlockHeaderSkeleton />}
             />
@@ -29,6 +30,9 @@ export const CurrentStepBlock: Component = () => {
                 </Match>
                 <Match when={currentStep()?.stepType === 'questionstep'}>
                     <QuestionStep />
+                </Match>
+                <Match when={currentStep()?.stepType === 'problemstep'}>
+                    <ProblemStep />
                 </Match>
             </Switch>
         </>

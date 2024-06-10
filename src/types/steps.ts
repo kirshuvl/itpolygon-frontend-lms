@@ -14,3 +14,11 @@ export interface QuestionStepBodyInterface {
     id: number
     text: EditorData
 }
+
+export interface ProblemStepBodyInterface {
+    id: number
+    text: EditorData
+    input: EditorData
+    output: EditorData
+    notes: EditorData
+}
