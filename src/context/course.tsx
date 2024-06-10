@@ -10,14 +10,14 @@ import {
     useContext,
 } from 'solid-js'
 import { apiCourses } from '../api/apiCourses'
-import type { CourseCurriculum } from '../types/courses'
+import type { Course } from '../types/courses'
 import { debugMessage } from '../utils/debugMessage'
 
 type CourseContextType = {
-    courseCurriculum: Resource<CourseCurriculum | null>
+    courseCurriculum: Resource<Course | null>
     actions: {
-        mutateCourse: Setter<CourseCurriculum | undefined>
-        refetchCourse: () => CourseCurriculum | Promise<CourseCurriculum | undefined> | null | undefined
+        mutateCourse: Setter<Course | undefined>
+        refetchCourse: () => Course | Promise<Course | undefined> | null | undefined
     }
 }
 
@@ -27,7 +27,7 @@ export const CourseProvider: ParentComponent = (props) => {
     const { courseId } = useParams<{ courseId: string }>()
 
     const [courseCurriculum, { mutate: mutateCourse, refetch: refetchCourse }] = createResource<
-        CourseCurriculum,
+        Course,
         { courseId: string }
     >({ courseId: courseId }, apiCourses.getCourse)
 

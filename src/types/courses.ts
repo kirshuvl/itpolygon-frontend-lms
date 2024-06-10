@@ -1,6 +1,6 @@
 import type { TextStepBody, VideoStepBody } from './steps'
 
-export interface Course {
+export interface CourseInfoInterface {
     id: number
     title: string
     icon?: string
@@ -18,7 +18,7 @@ export interface Course {
     }
 }
 
-export interface CourseCurriculum {
+export interface Course {
     id: number
     title: string
     icon?: string
