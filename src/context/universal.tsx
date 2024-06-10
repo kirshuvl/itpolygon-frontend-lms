@@ -86,7 +86,8 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
     }
 
     const updateUserStepEnroll = async ({ status }: { status: string }) => {
-        const enrollId = currentStep()?.userEnroll?.id
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        const enrollId = currentStep()?.userEnroll?.id!
 
         const stepId = currentStep()?.id
         const enroll = await apiCourses.updateUserStepEnroll({ enrollId: enrollId, status: status })
