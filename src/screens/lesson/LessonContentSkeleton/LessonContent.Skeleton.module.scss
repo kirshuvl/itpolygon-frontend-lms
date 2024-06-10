@@ -1,0 +1,9 @@
+@import "../../../styles/animations";
+
+.skeleton {
+    background-color: var(--slate-200);
+    width: 100%;
+    height: 19rem;
+    border-radius: 0.5rem;
+    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

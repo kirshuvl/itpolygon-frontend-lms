@@ -1,5 +1,5 @@
 import { For, type ParentComponent, Show, createSignal } from 'solid-js'
-import type { Topic } from '../../types/courses'
+import type { TopicInterface } from '../../types/courses'
 
 import clsx from 'clsx'
 import { ProgressBarVertical } from 'itpolygon-ui-dev'
@@ -9,7 +9,7 @@ import { LessonCard } from '../LessonCard/LessonCard'
 import styles from './TopicCard.module.scss'
 
 type Props = {
-    topic: Topic
+    topic: TopicInterface
     index: number
 }
 

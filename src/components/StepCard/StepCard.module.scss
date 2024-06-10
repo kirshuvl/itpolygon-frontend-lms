@@ -1,0 +1,77 @@
+@import "../../styles/animations";
+
+.card {
+    display: flex;
+    background-color: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    padding-right: 1.5rem;
+    cursor: pointer;
+    gap: 0.5rem;
+    align-items: center;
+
+    &:hover {
+        background-color: var(--slate-50);
+    }
+
+    .icon {
+        display: flex;
+        background-color: var(--slate-200);
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 0.5rem;
+        justify-content: center;
+        align-items: center;
+
+        .svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem 0;
+        gap: 0.5rem;
+        margin-right: auto;
+
+        .line {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .enrollInfo {
+            font-size: 0.75rem;
+            line-height: 1rem;
+
+            &.none {
+                color: var(--slate-400);
+            }
+
+            &.ok {
+                color: var(--emerald-700);
+            }
+
+            &.wa {
+                color: var(--red-700);
+            }
+
+            &.process {
+                color: var(--blue-700);
+            }
+        }
+    }
+}
+
+.active {
+    background-color: var(--slate-100);
+}
+
+.loading {
+    color: var(--blue-700);
+    height: 1.5rem;
+    width: 1.5rem;
+    animation: spin 2s linear infinite;
+}

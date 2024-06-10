@@ -1,5 +1,5 @@
 import { type Component, Show } from 'solid-js'
-import type { Course } from '../../types/courses'
+import type { CourseInfoInterface } from '../../types/courses'
 
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
@@ -7,7 +7,7 @@ import { ProgressBarVertical } from 'itpolygon-ui-dev'
 import styles from './CourseCard.module.scss'
 
 type Props = {
-    course: Course
+    course: CourseInfoInterface
 }
 
 export const CourseCard: Component<Props> = (props) => {

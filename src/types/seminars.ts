@@ -1,14 +1,14 @@
-interface Teacher {
+interface TeacherInterface {
     id: number
     firstName: string
     lastName: string
     icon?: string
 }
 
-export interface Seminar {
+export interface SeminarInfoInterface {
     id: number
     date: Date
-    teachers: Teacher[]
+    teachers: TeacherInterface[]
     course: {
         id: number
         title: string

@@ -16,9 +16,9 @@ import {
     resetTokens,
     setAccessToken,
     setRefreshToken,
-} from '../api/session/apiSession'
+} from '../api/apiSession'
 
-import { apiSession } from '../api/session/apiSession'
+import { apiSession } from '../api/apiSession'
 import { debugMessage } from '../utils/debugMessage'
 
 type SessionStateContextType = {

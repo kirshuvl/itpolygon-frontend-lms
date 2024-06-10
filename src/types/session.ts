@@ -1,13 +1,13 @@
-export interface refreshToken {
+export interface refreshTokenInterface {
     refresh: string
 }
 
-export interface accessToken {
+export interface accessTokenInterface {
     access: string
 }
 
-export interface infoToken {
+export interface infoTokenInterface {
     detail?: string
 }
 
-export interface Tokens extends refreshToken, accessToken, infoToken {}
+export interface TokensInterface extends refreshTokenInterface, accessTokenInterface, infoTokenInterface {}
