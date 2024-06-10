@@ -1,10 +1,10 @@
 import { type Component, For } from 'solid-js'
-import { useLessonStateContext } from '../../../context/lesson'
+import { useResourseStateContext } from '../../../context/universal'
 import type { TextStepBodyInterface } from '../../../types/steps'
 import { EditorBlock } from '../../Editor/EditorBlock'
 
 export const TextStep: Component = () => {
-    const { currentStep } = useLessonStateContext()
+    const { currentStep } = useResourseStateContext()
     const stepBody = currentStep()?.body as TextStepBodyInterface
 
     return (

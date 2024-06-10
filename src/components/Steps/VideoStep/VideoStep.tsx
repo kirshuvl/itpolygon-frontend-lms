@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import type { Component } from 'solid-js'
-import { useLessonStateContext } from '../../../context/lesson'
+import { useResourseStateContext } from '../../../context/universal'
 import type { VideoStepBodyInterface } from '../../../types/steps'
 import styles from './VideoStep.module.scss'
 export const VideoStep: Component = () => {
-    const { currentStep } = useLessonStateContext()
+    const { currentStep } = useResourseStateContext()
     const stepBody = currentStep()?.body as VideoStepBodyInterface
 
     return (

@@ -5,12 +5,12 @@ import clsx from 'clsx'
 import { ResourseProvider } from '../../context/universal'
 import { CurrentStepBlock } from '../../widgets/CurrentStepBlock/CurrentStepBlock'
 import { StepsBlock } from '../../widgets/StepsBlock/StepsBlock'
-import styles from './Lesson.Screen.module.scss'
+import styles from './Homework.Screen.module.scss'
 
-export const LessonScreen: Component = () => {
+export const HomeworkScreen: Component = () => {
     return (
         <>
-            <ResourseProvider pageType="lesson">
+            <ResourseProvider pageType="homework">
                 <div class={clsx(styles.dashboard)}>
                     <div class={clsx(styles.column, styles.left)}>
                         <div class={clsx(styles.card)}>

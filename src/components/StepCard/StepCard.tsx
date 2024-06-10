@@ -4,10 +4,10 @@ import type { StepInterface } from '../../types/courses'
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
 import { IconCode, IconQuestion, IconText, IconVideo } from 'itpolygon-ui-dev'
-import { useLessonStateContext } from '../../context/lesson'
 import styles from './StepCard.module.scss'
 
 import { IconLoading } from 'itpolygon-ui-dev'
+import { useResourseStateContext } from '../../context/universal'
 
 type Props = {
     step: StepInterface
@@ -16,11 +16,12 @@ type Props = {
 export const StepCard: Component<Props> = (props) => {
     const step = props.step
     const {
-        lesson,
+        resource,
+        url,
         currentStep,
         setCurrentStep,
         actions: { createUserStepEnroll },
-    } = useLessonStateContext()
+    } = useResourseStateContext()
     const [isUpdating, setIsUpdating] = createSignal<boolean>(false)
 
     const navigate = useNavigate()
@@ -57,7 +58,7 @@ export const StepCard: Component<Props> = (props) => {
 
     const buttonClick = () => {
         setCurrentStep(step)
-        navigate(`/lesson/${lesson()?.id}/step/${step.id}`)
+        navigate(`/${url}/${resource()?.id}/step/${step.id}`)
     }
 
     return (
