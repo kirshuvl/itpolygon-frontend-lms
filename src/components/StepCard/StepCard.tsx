@@ -15,7 +15,12 @@ type Props = {
 
 export const StepCard: Component<Props> = (props) => {
     const step = props.step
-    const { lesson, currentStep, setCurrentStep } = useLessonStateContext()
+    const {
+        lesson,
+        currentStep,
+        setCurrentStep,
+        actions: { createUserStepEnroll },
+    } = useLessonStateContext()
     const [isUpdating, setIsUpdating] = createSignal<boolean>(false)
 
     const navigate = useNavigate()
@@ -44,6 +49,7 @@ export const StepCard: Component<Props> = (props) => {
         if (currentStep() && currentStep()?.id === step.id) {
             if (currentStep() && currentStep()?.userEnroll === null) {
                 setIsUpdating(true)
+                createUserStepEnroll({ stepId: step.id })
                 setIsUpdating(false)
             }
         }

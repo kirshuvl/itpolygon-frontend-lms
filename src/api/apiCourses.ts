@@ -1,4 +1,10 @@
-import type { CourseInfoInterface, CourseInterface, LessonInterface } from '../types/courses'
+import type {
+    CourseInfoInterface,
+    CourseInterface,
+    LessonInterface,
+    UserStepEnrollInterface,
+} from '../types/courses'
+import { createFormData } from '../utils/createFormData'
 import { debugMessage } from '../utils/debugMessage'
 import { axiosPrivate } from './api'
 
@@ -30,6 +36,21 @@ export const apiCourses = {
             return response.data
         } catch (error) {
             debugMessage(`[getLesson] ${error}`)
+            throw error
+        }
+    },
+    createUserStepEnroll: async ({ stepId }: { stepId: number }): Promise<UserStepEnrollInterface> => {
+        try {
+            const response = await axiosPrivate.post(
+                'lms/steps/enrolls/',
+                createFormData({
+                    step: stepId,
+                }),
+            )
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[getStep] ${error}`)
             throw error
         }
     },

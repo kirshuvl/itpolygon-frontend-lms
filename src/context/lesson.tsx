@@ -1,4 +1,5 @@
 import { useParams } from '@solidjs/router'
+import { produce } from 'immer'
 import {
     type Accessor,
     type ParentComponent,
@@ -23,6 +24,7 @@ type LessonContextType = {
     actions: {
         mutateLesson: Setter<LessonInterface | undefined>
         refetchLesson: () => LessonInterface | Promise<LessonInterface | undefined> | null | undefined
+        createUserStepEnroll: ({ stepId }: { stepId: number }) => void
     }
 }
 
@@ -54,6 +56,18 @@ export const LessonProvider: ParentComponent = (props) => {
         setCurrentStep(step)
     })
 
+    const createUserStepEnroll = async ({ stepId }: { stepId: number }) => {
+        const enroll = await apiCourses.createUserStepEnroll({ stepId: stepId })
+        const newLesson = produce(lesson(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                step.userEnroll = enroll
+            }
+        })
+        mutateLesson(newLesson)
+    }
+
     const value = {
         lesson,
         currentStep,
@@ -61,6 +75,7 @@ export const LessonProvider: ParentComponent = (props) => {
         actions: {
             mutateLesson,
             refetchLesson,
+            createUserStepEnroll,
         },
     }
 

@@ -43,11 +43,11 @@ export interface StepInterface {
     id: number
     title: string | null
     stepType: 'textstep' | 'videostep' | 'questionstep' | 'problemstep'
-    userEnroll: UserEnrollInterface | null
+    userEnroll: UserStepEnrollInterface | null
     body: TextStepBodyInterface | VideoStepBodyInterface
 }
 
-export interface UserEnrollInterface {
+export interface UserStepEnrollInterface {
     id: number
     status: 'OK' | 'PR' | 'WA'
 }
