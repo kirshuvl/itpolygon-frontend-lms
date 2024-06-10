@@ -5,7 +5,6 @@ import {
     type Resource,
     type Setter,
     createContext,
-    createEffect,
     createResource,
     createSignal,
     onCleanup,
@@ -38,19 +37,20 @@ export const LessonProvider: ParentComponent = (props) => {
 
     const [currentStep, setCurrentStep] = createSignal<Step>()
 
-    createEffect(() => {
-        if (params.stepId !== undefined) {
-            const step = lesson()?.steps.find((step) => step.id.toString() === params.stepId)
-            setCurrentStep(step)
-        } else {
-            let step = lesson()?.steps.find(
+    onMount(() => {
+        let step = null
+        if (params.stepId === undefined) {
+            step = lesson()?.steps.find(
                 (step) => step.userEnroll === null || step.userEnroll.status !== 'OK',
             )
+
             if (step === undefined) {
                 step = lesson()?.steps[0]
             }
-            setCurrentStep(step)
+        } else {
+            step = lesson()?.steps.find((step) => step.id.toString() === params.stepId)
         }
+        setCurrentStep(step)
     })
 
     const value = {

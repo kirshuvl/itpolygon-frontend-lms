@@ -13,9 +13,12 @@ export const AppRouters = () => {
                 <Route path="/" component={LoginScreen} />
             </Route>
             <Route path="/" component={MainLayout}>
-                <Route path="/dashboard" component={DashboardScreen} />
-                <Route path="/course/:courseId" component={CourseScreen} />
-                <Route path="/lesson/:lessonId" component={LessonScreen} />
+                <Route path="/dashboard/" component={DashboardScreen} />
+                <Route path="/course/:courseId/" component={CourseScreen} />
+                <Route
+                    path={['/lesson/:lessonId', '/lesson/:lessonId/step/:stepId/']}
+                    component={LessonScreen}
+                />
             </Route>
         </Router>
     )

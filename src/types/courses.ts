@@ -42,7 +42,7 @@ export interface Lesson {
 export interface Step {
     id: number
     title: string | null
-    stepType: 'textstep' | 'videostep'
+    stepType: 'textstep' | 'videostep' | 'questionstep' | 'problemstep'
     userEnroll: UserEnroll | null
     body: TextStepBody | VideoStepBody
 }
