@@ -1,12 +1,6 @@
 import axios from 'axios'
 import type { Tokens } from '../types/session'
-import {
-    apiSession,
-    getAccessToken,
-    getRefreshToken,
-    setAccessToken,
-    setRefreshToken,
-} from './session/apiSession'
+import { apiSession, getAccessToken, getRefreshToken, setAccessToken, setRefreshToken } from './apiSession'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 

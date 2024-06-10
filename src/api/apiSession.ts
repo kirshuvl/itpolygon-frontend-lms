@@ -1,8 +1,8 @@
 import { jwtDecode } from 'jwt-decode'
-import type { Tokens } from '../../types/session'
-import { createFormData } from '../../utils/createFormData'
-import { debugMessage } from '../../utils/debugMessage'
-import { axiosCommon } from '../api'
+import type { Tokens } from '../types/session'
+import { createFormData } from '../utils/createFormData'
+import { debugMessage } from '../utils/debugMessage'
+import { axiosCommon } from './api'
 
 const ACCESS_TOKEN_LOCAL_STORAGE_KEY = 'access'
 const REFRESH_TOKEN_LOCAL_STORAGE_KEY = 'refresh'

@@ -8,8 +8,8 @@ import {
     onMount,
     useContext,
 } from 'solid-js'
-import { apiCourses } from '../api/courses/apiCourses'
-import { apiSeminars } from '../api/seminars/apiSeminars'
+import { apiCourses } from '../api/apiCourses'
+import { apiSeminars } from '../api/apiSeminars'
 import type { Course } from '../types/courses'
 import type { Seminar } from '../types/seminars'
 import { debugMessage } from '../utils/debugMessage'

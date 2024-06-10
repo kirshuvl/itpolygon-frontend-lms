@@ -1,6 +1,6 @@
-import type { Seminar } from '../../types/seminars'
-import { debugMessage } from '../../utils/debugMessage'
-import { axiosPrivate } from '../api'
+import type { Seminar } from '../types/seminars'
+import { debugMessage } from '../utils/debugMessage'
+import { axiosPrivate } from './api'
 
 export const apiSeminars = {
     getSeminars: async (): Promise<Seminar[]> => {

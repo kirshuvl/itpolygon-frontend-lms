@@ -1,6 +1,6 @@
-import type { Course, CourseCurriculum, Lesson } from '../../types/courses'
-import { debugMessage } from '../../utils/debugMessage'
-import { axiosPrivate } from '../api'
+import type { Course, CourseCurriculum, Lesson } from '../types/courses'
+import { debugMessage } from '../utils/debugMessage'
+import { axiosPrivate } from './api'
 
 export const apiCourses = {
     getCourses: async (): Promise<Course[]> => {

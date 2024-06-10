@@ -9,7 +9,7 @@ import {
     onMount,
     useContext,
 } from 'solid-js'
-import { apiCourses } from '../api/courses/apiCourses'
+import { apiCourses } from '../api/apiCourses'
 import type { CourseCurriculum } from '../types/courses'
 import { debugMessage } from '../utils/debugMessage'
 
