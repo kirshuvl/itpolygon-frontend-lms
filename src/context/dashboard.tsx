@@ -11,7 +11,7 @@ import {
 import { apiCourses } from '../api/apiCourses'
 import { apiSeminars } from '../api/apiSeminars'
 import type { CourseInfoInterface } from '../types/courses'
-import type { Seminar } from '../types/seminars'
+import type { SeminarInfoInterface } from '../types/seminars'
 import { debugMessage } from '../utils/debugMessage'
 import { useSessionStateContext } from './session'
 
@@ -28,10 +28,14 @@ type DashboardContextType = {
         }
     }
     seminars: {
-        studentSeminars: Resource<Seminar[] | null>
+        studentSeminars: Resource<SeminarInfoInterface[] | null>
         actions: {
-            mutateStudentSeminars: () => Setter<Seminar[]> | undefined
-            refetchStudentSeminars: () => Seminar[] | Promise<Seminar[] | undefined> | null | undefined
+            mutateStudentSeminars: () => Setter<SeminarInfoInterface[]> | undefined
+            refetchStudentSeminars: () =>
+                | SeminarInfoInterface[]
+                | Promise<SeminarInfoInterface[] | undefined>
+                | null
+                | undefined
         }
     }
 }
@@ -44,7 +48,7 @@ export const DashboardProvider: ParentComponent = (props) => {
     const [studentCourses, { mutate: mutateStudentCourses, refetch: refetchStudentCourses }] =
         createResource<CourseInfoInterface[], boolean>(isAuthenticated, apiCourses.getCourses)
     const [studentSeminars, { mutate: mutateStudentSeminars, refetch: refetchStudentSeminars }] =
-        createResource<Seminar[], boolean>(isAuthenticated, apiSeminars.getSeminars)
+        createResource<SeminarInfoInterface[], boolean>(isAuthenticated, apiSeminars.getSeminars)
     onMount(() => {
         debugMessage('[onMount][Provider] DashboardProvider')
     })

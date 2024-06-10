@@ -1,9 +1,9 @@
-import type { Seminar } from '../types/seminars'
+import type { SeminarInfoInterface } from '../types/seminars'
 import { debugMessage } from '../utils/debugMessage'
 import { axiosPrivate } from './api'
 
 export const apiSeminars = {
-    getSeminars: async (): Promise<Seminar[]> => {
+    getSeminars: async (): Promise<SeminarInfoInterface[]> => {
         try {
             const response = await axiosPrivate.get('lms/seminars/')
 

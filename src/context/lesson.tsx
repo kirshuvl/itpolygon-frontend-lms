@@ -12,16 +12,16 @@ import {
     useContext,
 } from 'solid-js'
 import { apiCourses } from '../api/apiCourses'
-import type { Lesson, Step } from '../types/courses'
+import type { LessonInterface, StepInterface } from '../types/courses'
 import { debugMessage } from '../utils/debugMessage'
 
 type LessonContextType = {
-    lesson: Resource<Lesson | null>
-    currentStep: Accessor<Step | undefined>
-    setCurrentStep: Setter<Step | undefined>
+    lesson: Resource<LessonInterface | null>
+    currentStep: Accessor<StepInterface | undefined>
+    setCurrentStep: Setter<StepInterface | undefined>
     actions: {
-        mutateLesson: Setter<Lesson | undefined>
-        refetchLesson: () => Lesson | Promise<Lesson | undefined> | null | undefined
+        mutateLesson: Setter<LessonInterface | undefined>
+        refetchLesson: () => LessonInterface | Promise<LessonInterface | undefined> | null | undefined
     }
 }
 
@@ -31,11 +31,11 @@ export const LessonProvider: ParentComponent = (props) => {
     const params = useParams<{ lessonId: string; stepId: string }>()
 
     const [lesson, { mutate: mutateLesson, refetch: refetchLesson }] = createResource<
-        Lesson,
+        LessonInterface,
         { lessonId: string }
     >({ lessonId: params.lessonId }, apiCourses.getLesson)
 
-    const [currentStep, setCurrentStep] = createSignal<Step>()
+    const [currentStep, setCurrentStep] = createSignal<StepInterface>()
 
     onMount(() => {
         let step = null

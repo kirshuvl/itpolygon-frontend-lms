@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { Tokens } from '../types/session'
+import type { TokensInterface } from '../types/session'
 import { apiSession, getAccessToken, getRefreshToken, setAccessToken, setRefreshToken } from './apiSession'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -12,7 +12,7 @@ export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
 })
 
-let refreshTokenPromise: Promise<Tokens> | null = null
+let refreshTokenPromise: Promise<TokensInterface> | null = null
 
 axiosPrivate.interceptors.request.use(
     async (config) => {

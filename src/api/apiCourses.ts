@@ -1,4 +1,4 @@
-import type { Course, CourseInfoInterface, Lesson } from '../types/courses'
+import type { CourseInfoInterface, CourseInterface, LessonInterface } from '../types/courses'
 import { debugMessage } from '../utils/debugMessage'
 import { axiosPrivate } from './api'
 
@@ -13,7 +13,7 @@ export const apiCourses = {
             throw error
         }
     },
-    getCourse: async ({ courseId }: { courseId: string }): Promise<Course> => {
+    getCourse: async ({ courseId }: { courseId: string }): Promise<CourseInterface> => {
         try {
             const response = await axiosPrivate.get(`lms/courses/${courseId}/curriculum/`)
 
@@ -23,7 +23,7 @@ export const apiCourses = {
             throw error
         }
     },
-    getLesson: async ({ lessonId }: { lessonId: string }): Promise<Lesson> => {
+    getLesson: async ({ lessonId }: { lessonId: string }): Promise<LessonInterface> => {
         try {
             const response = await axiosPrivate.get(`lms/lessons/${lessonId}/steps/`)
 

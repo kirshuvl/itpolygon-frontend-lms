@@ -1,5 +1,5 @@
 import { type Component, Match, Show, Switch, createEffect, createSignal } from 'solid-js'
-import type { Step } from '../../types/courses'
+import type { StepInterface } from '../../types/courses'
 
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
@@ -8,8 +8,9 @@ import { useLessonStateContext } from '../../context/lesson'
 import styles from './StepCard.module.scss'
 
 import { IconLoading } from 'itpolygon-ui-dev'
+
 type Props = {
-    step: Step
+    step: StepInterface
 }
 
 export const StepCard: Component<Props> = (props) => {

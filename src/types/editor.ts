@@ -1,15 +1,15 @@
-interface EditorBaseBlock {
+interface EditorBaseBlockInterface {
     id: string
 }
 
-export interface EditorTextBlock extends EditorBaseBlock {
+export interface EditorTextBlockInterface extends EditorBaseBlockInterface {
     type: 'paragraph'
     data: {
         text: string
     }
 }
 
-export interface EditorImageBlock extends EditorBaseBlock {
+export interface EditorImageBlockInterface extends EditorBaseBlockInterface {
     type: 'image'
     data: {
         file: {
@@ -20,5 +20,5 @@ export interface EditorImageBlock extends EditorBaseBlock {
 
 export interface EditorData {
     time: number
-    blocks: (EditorTextBlock | EditorImageBlock)[]
+    blocks: (EditorTextBlockInterface | EditorImageBlockInterface)[]
 }
