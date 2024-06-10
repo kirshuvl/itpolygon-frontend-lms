@@ -1,0 +1,53 @@
+@import "../../../styles/animations";
+
+.card {
+    display: flex;
+    border: 1px solid var(--slate-200);
+    background-color: var(--slate-100);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+    cursor: pointer;
+    align-items: center;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+    .index {
+        display: flex;
+        background-color: var(--slate-200);
+        border: 1px solid var(--slate-200);
+        height: 2.5rem;
+        border-radius: 0.5rem;
+        aspect-ratio: 1 / 1;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        display: flex;
+        width: 100%;
+        gap: 0.5rem;
+        align-items: center;
+
+        .title {
+            background-color: var(--slate-200);
+            height: 1.5rem;
+            width: 7rem;
+            border-radius: 0.25rem;
+        }
+    }
+
+    .info {
+        background-color: var(--slate-200);
+        height: 1rem;
+        width: 3.5rem;
+        border-radius: 0.25rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.lessons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3.75rem;
+    gap: 0.5rem;
+}
