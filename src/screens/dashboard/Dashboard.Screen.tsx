@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import type { Component } from 'solid-js'
 import { DashboardProvider } from '../../context/dashboard'
 import { CoursesBlock } from '../../widgets/CoursesBlock/CoursesBlock'
+import { SeminarsBlock } from '../../widgets/SeminarsBlock/SeminarsBlock'
 import styles from './Dashboard.Screen.module.scss'
 
 export const DashboardScreen: Component = () => {
@@ -14,7 +15,9 @@ export const DashboardScreen: Component = () => {
                     </div>
                 </div>
                 <div class={clsx(styles.column, styles.right)}>
-                    <div class={clsx(styles.card)}>SeminarsBlock</div>
+                    <div class={clsx(styles.card)}>
+                        <SeminarsBlock />
+                    </div>
                     <div class={clsx(styles.card)}>HomeworksBlock</div>
                 </div>
             </div>
