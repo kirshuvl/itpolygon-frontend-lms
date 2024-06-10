@@ -5,6 +5,7 @@ import {
     type Resource,
     type Setter,
     createContext,
+    createEffect,
     createResource,
     createSignal,
     onCleanup,
@@ -37,7 +38,7 @@ export const LessonProvider: ParentComponent = (props) => {
 
     const [currentStep, setCurrentStep] = createSignal<StepInterface>()
 
-    onMount(() => {
+    createEffect(() => {
         let step = null
         if (params.stepId === undefined) {
             step = lesson()?.steps.find(
