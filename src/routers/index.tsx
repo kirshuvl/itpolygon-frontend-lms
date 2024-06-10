@@ -1,4 +1,5 @@
 import { Route, Router } from '@solidjs/router'
+import { CourseScreen } from '../screens/course/Course.Screen'
 import { DashboardScreen } from '../screens/dashboard/Dashboard.Screen'
 import { LoginScreen } from '../screens/loginScreen/Login.Screen'
 import { AuthLayout } from './layouts/authLayout/authLayout'
@@ -12,6 +13,7 @@ export const AppRouters = () => {
             </Route>
             <Route path="/" component={MainLayout}>
                 <Route path="/dashboard" component={DashboardScreen} />
+                <Route path="/course/:courseId" component={CourseScreen} />
             </Route>
         </Router>
     )

@@ -1,0 +1,42 @@
+.card {
+    display: flex;
+    border: 1px solid var(--slate-200);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+    cursor: pointer;
+    align-items: center;
+
+    &:hover {
+        background-color: var(--slate-100);
+    }
+
+    .index {
+        display: flex;
+        background-color: var(--white);
+        border: 1px solid var(--slate-200);
+        height: 2.5rem;
+        border-radius: 0.5rem;
+        aspect-ratio: 1 / 1;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        margin-right: auto;
+    }
+
+    .info {
+        color: var(--slate-400);
+        font-size: 0.75rem;
+        line-height: 1rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.lessons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3.75rem;
+    gap: 0.5rem;
+}
