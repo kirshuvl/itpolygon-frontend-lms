@@ -1,4 +1,4 @@
-import type { Course, CourseCurriculum } from '../../types/courses'
+import type { Course, CourseCurriculum, Lesson } from '../../types/courses'
 import { debugMessage } from '../../utils/debugMessage'
 import { axiosPrivate } from '../api'
 
@@ -20,6 +20,16 @@ export const apiCourses = {
             return response.data
         } catch (error) {
             debugMessage(`[getCourse] ${error}`)
+            throw error
+        }
+    },
+    getLesson: async ({ lessonId }: { lessonId: string }): Promise<Lesson> => {
+        try {
+            const response = await axiosPrivate.get(`lms/lessons/${lessonId}/steps/`)
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[getLesson] ${error}`)
             throw error
         }
     },
