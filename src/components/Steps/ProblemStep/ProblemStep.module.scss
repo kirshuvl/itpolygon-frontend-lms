@@ -1,0 +1,17 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

@@ -1,6 +1,6 @@
-import type { TextStepBody, VideoStepBody } from './steps'
+import type { TextStepBodyInterface, VideoStepBodyInterface } from './steps'
 
-export interface Course {
+export interface CourseInfoInterface {
     id: number
     title: string
     icon?: string
@@ -18,36 +18,36 @@ export interface Course {
     }
 }
 
-export interface CourseCurriculum {
+export interface CourseInterface {
     id: number
     title: string
     icon?: string
-    topics: Topic[]
+    topics: TopicInterface[]
 }
 
-export interface Topic {
+export interface TopicInterface {
     id: number
     title: string
     number: number
-    lessons: Lesson[]
+    lessons: LessonInterface[]
 }
 
-export interface Lesson {
+export interface LessonInterface {
     id: number
     title: string
     number: number
-    steps: Step[]
+    steps: StepInterface[]
 }
 
-export interface Step {
+export interface StepInterface {
     id: number
     title: string | null
-    stepType: 'textstep' | 'videostep'
-    userEnroll: UserEnroll | null
-    body: TextStepBody | VideoStepBody
+    stepType: 'textstep' | 'videostep' | 'questionstep' | 'problemstep'
+    userEnroll: UserStepEnrollInterface | null
+    body: TextStepBodyInterface | VideoStepBodyInterface
 }
 
-export interface UserEnroll {
+export interface UserStepEnrollInterface {
     id: number
     status: 'OK' | 'PR' | 'WA'
 }

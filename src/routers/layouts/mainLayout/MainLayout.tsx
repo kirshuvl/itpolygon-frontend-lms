@@ -23,7 +23,7 @@ export const MainLayout: ParentComponent = (props) => {
     })
 
     onCleanup(() => {
-        debugMessage('[onCleanup][Layout] SeMainLayoutssion')
+        debugMessage('[onCleanup][Layout] MainLayout')
     })
     return (
         <div class="container">

@@ -1,5 +1,5 @@
 import type { ParentComponent } from 'solid-js'
-import type { Lesson } from '../../types/courses'
+import type { LessonInterface } from '../../types/courses'
 
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
@@ -7,7 +7,7 @@ import { ProgressBarVertical } from 'itpolygon-ui-dev'
 import styles from './LessonCard.module.scss'
 
 type Props = {
-    lesson: Lesson
+    lesson: LessonInterface
     index: number
 }
 

@@ -1,0 +1,56 @@
+@import "../../../styles/animations";
+
+.card {
+    display: flex;
+    background-color: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    gap: 0.5rem;
+    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+    &:hover {
+        background-color: var(--slate-50);
+    }
+
+    .icon {
+        background-color: var(--slate-200);
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem 0;
+        gap: 0.5rem;
+
+        .line {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .first {
+            background-color: var(--slate-200);
+            height: 1.5rem;
+            width: 7rem;
+            border-radius: 4px;
+        }
+
+        .second {
+            background-color: var(--slate-200);
+            height: 1.5rem;
+            width: 3.5rem;
+            border-radius: 4px;
+        }
+
+        .third {
+            background-color: var(--slate-200);
+            height: 1rem;
+            width: 3.75rem;
+            border-radius: 4px;
+        }
+    }
+}

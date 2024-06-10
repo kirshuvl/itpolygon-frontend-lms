@@ -2,11 +2,11 @@ import { type Component, Show } from 'solid-js'
 
 import { A } from '@solidjs/router'
 import clsx from 'clsx'
-import type { Seminar } from '../../types/seminars'
+import type { SeminarInfoInterface } from '../../types/seminars'
 import styles from './SeminarCard.module.scss'
 
 type Props = {
-    seminar: Seminar
+    seminar: SeminarInfoInterface
 }
 
 export const SeminarCard: Component<Props> = (props) => {

@@ -1,8 +1,8 @@
 import { jwtDecode } from 'jwt-decode'
-import type { Tokens } from '../../types/session'
-import { createFormData } from '../../utils/createFormData'
-import { debugMessage } from '../../utils/debugMessage'
-import { axiosCommon } from '../api'
+import type { TokensInterface } from '../types/session'
+import { createFormData } from '../utils/createFormData'
+import { debugMessage } from '../utils/debugMessage'
+import { axiosCommon } from './api'
 
 const ACCESS_TOKEN_LOCAL_STORAGE_KEY = 'access'
 const REFRESH_TOKEN_LOCAL_STORAGE_KEY = 'refresh'
@@ -45,7 +45,10 @@ export const resetTokens = () => {
 }
 
 export const apiSession = {
-    getTokens: async ({ email, password }: { email: string; password: string }): Promise<Tokens> => {
+    getTokens: async ({
+        email,
+        password,
+    }: { email: string; password: string }): Promise<TokensInterface> => {
         try {
             const response = await axiosCommon.post(
                 'auth/token/get/',
@@ -61,7 +64,7 @@ export const apiSession = {
             throw error
         }
     },
-    refreshToken: async ({ refreshToken }: { refreshToken: string }): Promise<Tokens> => {
+    refreshToken: async ({ refreshToken }: { refreshToken: string }): Promise<TokensInterface> => {
         try {
             const response = await axiosCommon.post(
                 'auth/token/refresh/',
