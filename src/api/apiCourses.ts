@@ -54,4 +54,22 @@ export const apiCourses = {
             throw error
         }
     },
+    updateUserStepEnroll: async ({
+        enrollId,
+        status,
+    }: { enrollId: number; status: string }): Promise<UserStepEnrollInterface> => {
+        try {
+            const response = await axiosPrivate.patch(
+                `lms/steps/enrolls/${enrollId}/`,
+                createFormData({
+                    status: status,
+                }),
+            )
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[updateUserStepEnroll] ${error}`)
+            throw error
+        }
+    },
 }

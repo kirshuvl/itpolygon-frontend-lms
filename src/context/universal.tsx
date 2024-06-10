@@ -28,6 +28,7 @@ type ResourseContextType<T> = {
         mutateResource: Setter<T | undefined>
         refetchResource: () => T | Promise<T | undefined> | null | undefined
         createUserStepEnroll: ({ stepId }: { stepId: number }) => void
+        updateUserStepEnroll: ({ status }: { status: string }) => void
     }
 }
 
@@ -83,6 +84,23 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         })
         mutateResource(newLesson)
     }
+
+    const updateUserStepEnroll = async ({ status }: { status: string }) => {
+        const enrollId = currentStep()?.userEnroll?.id
+
+        const stepId = currentStep()?.id
+        const enroll = await apiCourses.updateUserStepEnroll({ enrollId: enrollId, status: status })
+
+        const newLesson = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                step.userEnroll = enroll
+            }
+        })
+        mutateResource(newLesson)
+    }
+
     const url = props.pageType
     const value = {
         resource,
@@ -93,6 +111,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             mutateResource,
             refetchResource,
             createUserStepEnroll,
+            updateUserStepEnroll,
         },
     }
 
