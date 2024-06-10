@@ -9,3 +9,8 @@ export interface VideoStepBodyInterface {
     id: number
     video_url: string
 }
+
+export interface QuestionStepBodyInterface {
+    id: number
+    text: EditorData
+}

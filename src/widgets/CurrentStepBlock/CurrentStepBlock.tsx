@@ -1,5 +1,6 @@
 import { TitleBlock } from 'itpolygon-ui-dev'
 import { type Component, Match, Show, Switch } from 'solid-js'
+import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
 import { TextStep } from '../../components/Steps/TextStep/TextStep'
 import { VideoStep } from '../../components/Steps/VideoStep/VideoStep'
 import { useLessonStateContext } from '../../context/lesson'
@@ -25,6 +26,9 @@ export const CurrentStepBlock: Component = () => {
                 </Match>
                 <Match when={currentStep()?.stepType === 'videostep'}>
                     <VideoStep />
+                </Match>
+                <Match when={currentStep()?.stepType === 'questionstep'}>
+                    <QuestionStep />
                 </Match>
             </Switch>
         </>
