@@ -35,7 +35,7 @@ type ResourseContextType<T> = {
 const ResourseStateContext = createContext<ResourseContextType<LessonInterface | HomeworkInterface>>()
 
 type ResourseProviderType = {
-    pageType: 'lesson' | 'homework'
+    pageType: 'lesson' | 'homework' | 'seminar'
 }
 
 export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) => {

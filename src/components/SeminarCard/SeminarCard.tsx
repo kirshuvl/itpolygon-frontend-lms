@@ -1,6 +1,6 @@
 import { type Component, Show } from 'solid-js'
 
-import { A } from '@solidjs/router'
+import { A, useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
 import type { SeminarInfoInterface } from '../../types/seminars'
 import styles from './SeminarCard.module.scss'
@@ -21,10 +21,11 @@ export const SeminarCard: Component<Props> = (props) => {
 
     const hours = String(date.getHours()).padStart(2, '0')
     const minutes = String(date.getMinutes()).padStart(2, '0')
+    const navigate = useNavigate()
 
     const formattedDate = `${day}-${month}-${year} ${hours}:${minutes}`
     return (
-        <div class={clsx(styles.card)}>
+        <div onClick={() => navigate(`/seminar/${seminar.id}/`)} class={clsx(styles.card)}>
             <div class={clsx(styles.icon)}>
                 <Show
                     when={seminar.course.icon}
