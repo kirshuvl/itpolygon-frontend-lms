@@ -1,14 +1,14 @@
 import { type Component, For } from 'solid-js'
-import { useLessonStateContext } from '../../../context/lesson'
 
 import clsx from 'clsx'
 import { Button, InputField } from 'itpolygon-ui-dev'
+import { useResourseStateContext } from '../../../context/universal'
 import type { QuestionStepBodyInterface } from '../../../types/steps'
 import { EditorBlock } from '../../Editor/EditorBlock'
 import styles from './QuestionStep.module.scss'
 
 export const QuestionStep: Component = () => {
-    const { currentStep } = useLessonStateContext()
+    const { currentStep } = useResourseStateContext()
     const stepBody = currentStep()?.body as QuestionStepBodyInterface
 
     return (

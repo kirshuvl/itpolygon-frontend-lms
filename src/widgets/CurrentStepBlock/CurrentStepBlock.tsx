@@ -4,21 +4,21 @@ import { ProblemStep } from '../../components/Steps/ProblemStep/ProblemStep'
 import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
 import { TextStep } from '../../components/Steps/TextStep/TextStep'
 import { VideoStep } from '../../components/Steps/VideoStep/VideoStep'
-import { useLessonStateContext } from '../../context/lesson'
+import { useResourseStateContext } from '../../context/universal'
 import { LessonContentSkeleton } from '../../screens/lesson/LessonContentSkeleton/LessonContent.Skeleton'
 import { TopicBlockHeaderSkeleton } from '../TopicsBlock/Skeleton/TopicsBlock.Skeleton'
 
 export const CurrentStepBlock: Component = () => {
-    const { lesson, currentStep } = useLessonStateContext()
+    const { resource, currentStep } = useResourseStateContext()
 
     return (
         <>
             <TitleBlock
                 title={currentStep()?.title ?? 'Нет заголовка'}
-                loading={lesson.loading}
+                loading={resource.loading}
                 fallback={<TopicBlockHeaderSkeleton />}
             />
-            <Show when={lesson.loading}>
+            <Show when={resource.loading}>
                 <LessonContentSkeleton />
             </Show>
             <Switch>
