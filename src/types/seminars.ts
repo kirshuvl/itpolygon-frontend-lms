@@ -10,9 +10,5 @@ interface TeacherInterface {
 export interface SeminarInterface {
     id: number
     steps: StepInterface[]
-    teachers: {
-        id: number
-        firstName: string
-        lastname: string
-    }[]
+    teachers: TeacherInterface[]
 }
