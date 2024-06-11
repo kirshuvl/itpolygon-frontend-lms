@@ -1,3 +1,5 @@
+import type { StepInterface } from './courses'
+
 interface TeacherInterface {
     id: number
     firstName: string
@@ -14,4 +16,14 @@ export interface SeminarInfoInterface {
         title: string
         icon?: string
     }
+}
+
+export interface SeminarInterface {
+    id: number
+    steps: StepInterface[]
+    teachers: {
+        id: number
+        firstName: string
+        lastname: string
+    }[]
 }
