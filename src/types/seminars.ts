@@ -7,17 +7,6 @@ interface TeacherInterface {
     icon?: string
 }
 
-export interface SeminarInfoInterface {
-    id: number
-    date: Date
-    teachers: TeacherInterface[]
-    course: {
-        id: number
-        title: string
-        icon?: string
-    }
-}
-
 export interface SeminarInterface {
     id: number
     steps: StepInterface[]

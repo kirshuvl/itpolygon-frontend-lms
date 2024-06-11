@@ -1,23 +1,5 @@
 import type { TextStepBodyInterface, VideoStepBodyInterface } from './steps'
 
-export interface CourseInfoInterface {
-    id: number
-    title: string
-    icon?: string
-    userStatistics: {
-        totalSteps: number
-        completedSteps: number
-        theoreticalSteps: {
-            total: number
-            completed: number
-        }
-        practicalSteps: {
-            total: number
-            completed: number
-        }
-    }
-}
-
 export interface CourseInterface {
     id: number
     title: string
