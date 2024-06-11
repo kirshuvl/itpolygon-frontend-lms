@@ -15,8 +15,10 @@ import {
 } from 'solid-js'
 import { apiCourses } from '../api/apiCourses'
 import { apiHomeworks } from '../api/apiHomeworks'
+import { apiSeminars } from '../api/apiSeminars'
 import type { LessonInterface, StepInterface } from '../types/courses'
 import type { HomeworkInterface } from '../types/homeworks'
+import type { SeminarInterface } from '../types/seminars'
 import { debugMessage } from '../utils/debugMessage'
 
 type ResourseContextType<T> = {
@@ -32,7 +34,8 @@ type ResourseContextType<T> = {
     }
 }
 
-const ResourseStateContext = createContext<ResourseContextType<LessonInterface | HomeworkInterface>>()
+const ResourseStateContext =
+    createContext<ResourseContextType<LessonInterface | HomeworkInterface | SeminarInterface>>()
 
 type ResourseProviderType = {
     pageType: 'lesson' | 'homework' | 'seminar'
@@ -43,15 +46,18 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
 
     const fetchResource = ({
         resourseId,
-    }: { resourseId: string }): Promise<LessonInterface | HomeworkInterface> => {
+    }: { resourseId: string }): Promise<LessonInterface | HomeworkInterface | SeminarInterface> => {
         if (props.pageType === 'lesson') {
             return apiCourses.getLesson({ lessonId: resourseId })
+        }
+        if (props.pageType === 'seminar') {
+            return apiSeminars.getSeminar({ seminarId: resourseId })
         }
         return apiHomeworks.getHomework({ homeworkId: resourseId })
     }
 
     const [resource, { mutate: mutateResource, refetch: refetchResource }] = createResource<
-        LessonInterface | HomeworkInterface,
+        LessonInterface | HomeworkInterface | SeminarInterface,
         { resourseId: string }
     >({ resourseId: params.resourceId }, fetchResource)
 
