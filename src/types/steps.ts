@@ -14,7 +14,7 @@ export interface StepInterface {
 
 export interface UserStepEnrollInterface {
     id: number
-    status: 'OK' | 'PR' | 'WA'
+    status: 'OK' | 'PR' | 'WA' | 'WT'
 }
 
 export interface TextStepBodyInterface {
@@ -39,6 +39,7 @@ export interface ProblemStepBodyInterface {
     input: EditorDataInterface
     output: EditorDataInterface
     notes: EditorDataInterface
+    userProblems: UserAnswerForProblemStepInterface[]
 }
 
 export interface UserAnswerForQuestionStepInterface {
@@ -47,4 +48,11 @@ export interface UserAnswerForQuestionStepInterface {
     question: number
     answer: string
     is_correct: boolean
+}
+
+export interface UserAnswerForProblemStepInterface {
+    id: number
+    language: string
+    verdict: string
+    cputime: number
 }

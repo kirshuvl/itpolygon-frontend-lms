@@ -30,6 +30,7 @@ export const StepCard: Component<Props> = (props) => {
         PR: 'просмотрено',
         OK: 'решено',
         WA: 'неправильный ответ',
+        WT: 'на проверке',
     }
 
     function getStatusDescription(status: keyof typeof statusMap | undefined): string {
@@ -40,6 +41,7 @@ export const StepCard: Component<Props> = (props) => {
         PR: 'process',
         OK: 'ok',
         WA: 'wa',
+        WT: 'wt',
     }
 
     function getStyles(status: keyof typeof statusMap | undefined): string {
