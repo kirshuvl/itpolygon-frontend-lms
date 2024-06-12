@@ -1,4 +1,4 @@
-import { type Component, For, createSignal } from 'solid-js'
+import { type Component, For, Show, createSignal } from 'solid-js'
 
 import clsx from 'clsx'
 import { Button, InputField } from 'itpolygon-ui-dev'
@@ -8,6 +8,7 @@ import * as yup from 'yup'
 import { useResourseStateContext } from '../../../context/universal'
 import type { QuestionStepBodyInterface } from '../../../types/steps'
 import { EditorBlock } from '../../Editor/EditorBlock'
+import { UserAnswerCard } from '../../UserAnswerCard/UserAnswerCard'
 import styles from './QuestionStep.module.scss'
 
 type UserAnswer = {
@@ -39,22 +40,27 @@ export const QuestionStep: Component = () => {
         <>
             <div class={clsx(styles.body)}>
                 <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
-                <div class={clsx(styles.row)}>
-                    <InputField
-                        type="text"
-                        placeholder="Введите пароль"
-                        name="answer"
-                        formHandler={formHandler}
-                    />
-                    <Button
-                        value="Ответить"
-                        onClick={() => buttonClick()}
-                        disabled={formHandler.isFormInvalid()}
-                        loading={isLoading()}
-                    />
-                </div>
+                <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
+                    <div class={clsx(styles.row)}>
+                        <InputField
+                            type="text"
+                            placeholder="Введите пароль"
+                            name="answer"
+                            formHandler={formHandler}
+                        />
+                        <Button
+                            value="Ответить"
+                            onClick={() => buttonClick()}
+                            disabled={formHandler.isFormInvalid()}
+                            loading={isLoading()}
+                        />
+                    </div>
+                </Show>
             </div>
-            <div>{JSON.stringify(stepBody().userAnswers)}</div>
+            <div>
+                Ваши ответы
+                <For each={stepBody()?.userAnswers}>{(answer) => <UserAnswerCard answer={answer} />}</For>
+            </div>
         </>
     )
 }
