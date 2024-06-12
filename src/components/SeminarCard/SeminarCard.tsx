@@ -2,16 +2,16 @@ import { type Component, Show } from 'solid-js'
 
 import { A, useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
-import type { SeminarInfoInterface } from '../../types/seminars'
+import type { SeminarDashboardInterface } from '../../types/dashboard'
 import styles from './SeminarCard.module.scss'
 
 type Props = {
-    seminar: SeminarInfoInterface
+    seminar: SeminarDashboardInterface
 }
 
 export const SeminarCard: Component<Props> = (props) => {
     const seminar = props.seminar
-    const teacher = seminar.teachers[0]
+    const teacher = seminar.teacher
 
     const date = new Date(seminar.date)
 
