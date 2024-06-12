@@ -1,6 +1,10 @@
 import { Route, Router } from '@solidjs/router'
+import { CourseScreen } from '../screens/course/Course.Screen'
 import { DashboardScreen } from '../screens/dashboard/Dashboard.Screen'
+import { HomeworkScreen } from '../screens/homework/Homework.Screen'
+import { LessonScreen } from '../screens/lesson/Lesson.Screen'
 import { LoginScreen } from '../screens/loginScreen/Login.Screen'
+import { SeminarScreen } from '../screens/seminar/Seminar.Screen'
 import { AuthLayout } from './layouts/authLayout/authLayout'
 import { MainLayout } from './layouts/mainLayout/MainLayout'
 
@@ -12,13 +16,7 @@ export const AppRouters = () => {
             </Route>
             <Route path="/" component={MainLayout}>
                 <Route path="/dashboard" component={DashboardScreen} />
-            </Route>
-        </Router>
-    )
-}
-
-/*
-<Route path="/course/:courseId/" component={CourseScreen} />
+                <Route path="/course/:courseId/" component={CourseScreen} />
                 <Route
                     path={['/lesson/:resourceId', '/lesson/:resourceId/step/:stepId/']}
                     component={LessonScreen}
@@ -31,4 +29,7 @@ export const AppRouters = () => {
                     path={['/seminar/:resourceId', '/seminar/:resourceId/step/:stepId/']}
                     component={SeminarScreen}
                 />
-*/
+            </Route>
+        </Router>
+    )
+}

@@ -1,9 +1,9 @@
 import type { ParentComponent } from 'solid-js'
-import type { LessonInterface } from '../../types/courses'
 
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
 import { ProgressBarVertical } from 'itpolygon-ui-dev'
+import type { LessonInterface } from '../../types/lessons'
 import styles from './LessonCard.module.scss'
 
 type Props = {

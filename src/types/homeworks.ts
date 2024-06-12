@@ -1,16 +1,11 @@
-import type { StepInterface } from './courses'
+import type { CourseCommonInterface } from './dashboard'
+import type { StepInterface } from './steps'
+import type { UserCommonInterface } from './users'
 
 export interface HomeworkInterface {
     id: number
-    author: {
-        id: number
-        firstName: string
-        lastName: string
-        icon?: string
-    }
-    seminar: {
-        id: number
-        date: Date
-    }
+    date: Date
+    teacher: UserCommonInterface
+    course: CourseCommonInterface
     steps: StepInterface[]
 }

@@ -16,9 +16,10 @@ import {
 import { apiCourses } from '../api/apiCourses'
 import { apiHomeworks } from '../api/apiHomeworks'
 import { apiSeminars } from '../api/apiSeminars'
-import type { LessonInterface, StepInterface } from '../types/courses'
 import type { HomeworkInterface } from '../types/homeworks'
+import type { LessonInterface } from '../types/lessons'
 import type { SeminarInterface } from '../types/seminars'
+import type { StepInterface } from '../types/steps'
 import { debugMessage } from '../utils/debugMessage'
 
 type ResourseContextType<T> = {

@@ -1,5 +1,7 @@
-import type { CourseInterface, LessonInterface, UserStepEnrollInterface } from '../types/courses'
+import type { CourseInterface } from '../types/courses'
 import type { CourseDashboardInterface } from '../types/dashboard'
+import type { LessonInterface } from '../types/lessons'
+import type { UserStepEnrollInterface } from '../types/steps'
 import { createFormData } from '../utils/createFormData'
 import { debugMessage } from '../utils/debugMessage'
 import { axiosPrivate } from './api'

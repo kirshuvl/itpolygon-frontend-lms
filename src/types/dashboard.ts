@@ -1,3 +1,5 @@
+import type { UserCommonInterface } from './users'
+
 interface userStatistics {
     totalSteps: number
     completedSteps: number
@@ -11,14 +13,7 @@ interface userStatistics {
     }
 }
 
-interface Teacher {
-    id: number
-    firstName: string
-    lastName: string
-    icon?: string
-}
-
-interface Course {
+export interface CourseCommonInterface {
     id: number
     title: string
     icon?: string
@@ -34,8 +29,8 @@ export interface CourseDashboardInterface {
 export interface HomeworkDashboardInterface {
     id: number
     date: Date
-    teacher: Teacher
-    course: Course
+    teacher: UserCommonInterface
+    course: CourseCommonInterface
 }
 
 export interface SeminarDashboardInterface extends HomeworkDashboardInterface {}
