@@ -18,7 +18,7 @@ export interface EditorImageBlockInterface extends EditorBaseBlockInterface {
     }
 }
 
-export interface EditorData {
+export interface EditorDataInterface {
     time: number
     blocks: (EditorTextBlockInterface | EditorImageBlockInterface)[]
 }

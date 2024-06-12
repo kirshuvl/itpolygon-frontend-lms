@@ -1,13 +1,13 @@
 import { type Component, Show } from 'solid-js'
-import type { CourseInfoInterface } from '../../types/courses'
 
 import { useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
 import { ProgressBarVertical } from 'itpolygon-ui-dev'
+import type { CourseDashboardInterface } from '../../types/dashboard'
 import styles from './CourseCard.module.scss'
 
 type Props = {
-    course: CourseInfoInterface
+    course: CourseDashboardInterface
 }
 
 export const CourseCard: Component<Props> = (props) => {

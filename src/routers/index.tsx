@@ -15,7 +15,7 @@ export const AppRouters = () => {
                 <Route path="/" component={LoginScreen} />
             </Route>
             <Route path="/" component={MainLayout}>
-                <Route path="/dashboard/" component={DashboardScreen} />
+                <Route path="/dashboard" component={DashboardScreen} />
                 <Route path="/course/:courseId/" component={CourseScreen} />
                 <Route
                     path={['/lesson/:resourceId', '/lesson/:resourceId/step/:stepId/']}

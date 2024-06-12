@@ -9,31 +9,46 @@ import {
     useContext,
 } from 'solid-js'
 import { apiCourses } from '../api/apiCourses'
+import { apiHomeworks } from '../api/apiHomeworks'
 import { apiSeminars } from '../api/apiSeminars'
-import type { CourseInfoInterface } from '../types/courses'
-import type { SeminarInfoInterface } from '../types/seminars'
+import type {
+    CourseDashboardInterface,
+    HomeworkDashboardInterface,
+    SeminarDashboardInterface,
+} from '../types/dashboard'
 import { debugMessage } from '../utils/debugMessage'
 import { useSessionStateContext } from './session'
 
 type DashboardContextType = {
     courses: {
-        studentCourses: Resource<CourseInfoInterface[] | null>
+        studentCourses: Resource<CourseDashboardInterface[] | null>
         actions: {
-            mutateStudentCourses: () => Setter<CourseInfoInterface[]> | undefined
+            mutateStudentCourses: () => Setter<CourseDashboardInterface[]> | undefined
             refetchStudentCourses: () =>
-                | CourseInfoInterface[]
-                | Promise<CourseInfoInterface[] | undefined>
+                | CourseDashboardInterface[]
+                | Promise<CourseDashboardInterface[] | undefined>
                 | null
                 | undefined
         }
     }
     seminars: {
-        studentSeminars: Resource<SeminarInfoInterface[] | null>
+        studentSeminars: Resource<SeminarDashboardInterface[] | null>
         actions: {
-            mutateStudentSeminars: () => Setter<SeminarInfoInterface[]> | undefined
+            mutateStudentSeminars: () => Setter<SeminarDashboardInterface[]> | undefined
             refetchStudentSeminars: () =>
-                | SeminarInfoInterface[]
-                | Promise<SeminarInfoInterface[] | undefined>
+                | SeminarDashboardInterface[]
+                | Promise<SeminarDashboardInterface[] | undefined>
+                | null
+                | undefined
+        }
+    }
+    homeworks: {
+        studentHomeworks: Resource<HomeworkDashboardInterface[] | null>
+        actions: {
+            mutateStudentHomeworks: () => Setter<HomeworkDashboardInterface[]> | undefined
+            refetchStudentHomeworks: () =>
+                | HomeworkDashboardInterface[]
+                | Promise<HomeworkDashboardInterface[] | undefined>
                 | null
                 | undefined
         }
@@ -46,9 +61,14 @@ export const DashboardProvider: ParentComponent = (props) => {
     const { isAuthenticated } = useSessionStateContext()
 
     const [studentCourses, { mutate: mutateStudentCourses, refetch: refetchStudentCourses }] =
-        createResource<CourseInfoInterface[], boolean>(isAuthenticated, apiCourses.getCourses)
+        createResource<CourseDashboardInterface[], boolean>(isAuthenticated, apiCourses.getCourses)
+
     const [studentSeminars, { mutate: mutateStudentSeminars, refetch: refetchStudentSeminars }] =
-        createResource<SeminarInfoInterface[], boolean>(isAuthenticated, apiSeminars.getSeminars)
+        createResource<SeminarDashboardInterface[], boolean>(isAuthenticated, apiSeminars.getSeminars)
+
+    const [studentHomeworks, { mutate: mutateStudentHomeworks, refetch: refetchStudentHomeworks }] =
+        createResource<HomeworkDashboardInterface[], boolean>(isAuthenticated, apiHomeworks.getHomeworks)
+
     onMount(() => {
         debugMessage('[onMount][Provider] DashboardProvider')
     })
@@ -64,6 +84,7 @@ export const DashboardProvider: ParentComponent = (props) => {
             refetchStudentCourses,
         },
     }
+
     const seminars = {
         studentSeminars,
         actions: {
@@ -71,9 +92,19 @@ export const DashboardProvider: ParentComponent = (props) => {
             refetchStudentSeminars,
         },
     }
+
+    const homeworks = {
+        studentHomeworks,
+        actions: {
+            mutateStudentHomeworks,
+            refetchStudentHomeworks,
+        },
+    }
+
     const value = {
         courses,
         seminars,
+        homeworks,
     }
 
     return <DashboardStateContext.Provider value={value}>{props.children}</DashboardStateContext.Provider>
