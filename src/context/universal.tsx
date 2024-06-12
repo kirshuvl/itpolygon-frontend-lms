@@ -20,7 +20,7 @@ import { apiSteps } from '../api/apiSteps'
 import type { HomeworkInterface } from '../types/homeworks'
 import type { LessonInterface } from '../types/lessons'
 import type { SeminarInterface } from '../types/seminars'
-import type { QuestionStepBodyInterface, StepInterface } from '../types/steps'
+import type { ProblemStepBodyInterface, QuestionStepBodyInterface, StepInterface } from '../types/steps'
 import { debugMessage } from '../utils/debugMessage'
 
 type ResourseContextType<T> = {
@@ -34,6 +34,7 @@ type ResourseContextType<T> = {
         createUserStepEnroll: ({ stepId }: { stepId: number }) => void
         updateUserStepEnroll: ({ status }: { status: string }) => void
         createUserAnswerForQuestionStep: ({ answer }: { answer: string }) => void
+        createUserAnswerForProblemStep: ({ code }: { code: string }) => void
     }
 }
 
@@ -139,6 +140,52 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         mutateResource(newResourse)
     }
 
+    const createUserAnswerForProblemStep = async ({ code }: { code: string }) => {
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        const stepId = currentStep()?.id!
+        const serverAnswer = await apiSteps.createUserAnswerForProblemStep({
+            problemId: stepId,
+            code: code,
+        })
+        const userAnswerForProblemStep = serverAnswer.answer
+        const userEnroll = serverAnswer.userEnroll
+
+        const newResourse = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                const stepBody = step?.body as ProblemStepBodyInterface
+                if (stepBody.userProblems) {
+                    stepBody.userProblems.push(userAnswerForProblemStep)
+                } else {
+                    stepBody.userProblems = [userAnswerForProblemStep]
+                }
+
+                step.userEnroll = userEnroll
+                step.body = stepBody
+            }
+        })
+        mutateResource(newResourse)
+    }
+
+    const findRefetch = async () => {
+        console.log('SSSSSSS')
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        const steps = resource()?.steps.find(
+            (step) => step.stepType === 'problemstep' && step.userEnroll?.status === 'WT',
+        )
+        if (steps) {
+            console.log('!!!')
+            await refetchResource()
+        }
+    }
+
+    createEffect(() => {
+        if (resource()) {
+            findRefetch()
+        }
+    })
+
     const url = props.pageType
     const value = {
         resource,
@@ -151,6 +198,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             createUserStepEnroll,
             updateUserStepEnroll,
             createUserAnswerForQuestionStep,
+            createUserAnswerForProblemStep,
         },
     }
 
