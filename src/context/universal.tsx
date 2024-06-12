@@ -16,10 +16,11 @@ import {
 import { apiCourses } from '../api/apiCourses'
 import { apiHomeworks } from '../api/apiHomeworks'
 import { apiSeminars } from '../api/apiSeminars'
+import { apiSteps } from '../api/apiSteps'
 import type { HomeworkInterface } from '../types/homeworks'
 import type { LessonInterface } from '../types/lessons'
 import type { SeminarInterface } from '../types/seminars'
-import type { StepInterface } from '../types/steps'
+import type { QuestionStepBodyInterface, StepInterface } from '../types/steps'
 import { debugMessage } from '../utils/debugMessage'
 
 type ResourseContextType<T> = {
@@ -32,6 +33,7 @@ type ResourseContextType<T> = {
         refetchResource: () => T | Promise<T | undefined> | null | undefined
         createUserStepEnroll: ({ stepId }: { stepId: number }) => void
         updateUserStepEnroll: ({ status }: { status: string }) => void
+        createUserAnswerForQuestionStep: ({ answer }: { answer: string }) => void
     }
 }
 
@@ -82,14 +84,14 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
 
     const createUserStepEnroll = async ({ stepId }: { stepId: number }) => {
         const enroll = await apiCourses.createUserStepEnroll({ stepId: stepId })
-        const newLesson = produce(resource(), (draftState) => {
+        const newResourse = produce(resource(), (draftState) => {
             const step = draftState?.steps.find((step) => step.id === stepId)
 
             if (step) {
                 step.userEnroll = enroll
             }
         })
-        mutateResource(newLesson)
+        mutateResource(newResourse)
     }
 
     const updateUserStepEnroll = async ({ status }: { status: string }) => {
@@ -99,14 +101,42 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         const stepId = currentStep()?.id
         const enroll = await apiCourses.updateUserStepEnroll({ enrollId: enrollId, status: status })
 
-        const newLesson = produce(resource(), (draftState) => {
+        const newResourse = produce(resource(), (draftState) => {
             const step = draftState?.steps.find((step) => step.id === stepId)
 
             if (step) {
                 step.userEnroll = enroll
             }
         })
-        mutateResource(newLesson)
+        mutateResource(newResourse)
+    }
+
+    const createUserAnswerForQuestionStep = async ({ answer }: { answer: string }) => {
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        const stepId = currentStep()?.id!
+        const serverAnswer = await apiSteps.createUserAnswerForQuestionStep({
+            questionId: stepId,
+            answer: answer,
+        })
+        const userAnswerForQuesitonStep = serverAnswer.answer
+        const userEnroll = serverAnswer.userEnroll
+
+        const newResourse = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                const stepBody = step?.body as QuestionStepBodyInterface
+                if (stepBody.userAnswers) {
+                    stepBody.userAnswers.push(userAnswerForQuesitonStep)
+                } else {
+                    stepBody.userAnswers = [userAnswerForQuesitonStep]
+                }
+
+                step.userEnroll = userEnroll
+                step.body = stepBody
+            }
+        })
+        mutateResource(newResourse)
     }
 
     const url = props.pageType
@@ -120,6 +150,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             refetchResource,
             createUserStepEnroll,
             updateUserStepEnroll,
+            createUserAnswerForQuestionStep,
         },
     }
 

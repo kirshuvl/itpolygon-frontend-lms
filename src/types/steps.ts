@@ -5,7 +5,11 @@ export interface StepInterface {
     title: string | null
     stepType: 'textstep' | 'videostep' | 'questionstep' | 'problemstep'
     userEnroll: UserStepEnrollInterface | null
-    body: TextStepBodyInterface | VideoStepBodyInterface
+    body:
+        | TextStepBodyInterface
+        | VideoStepBodyInterface
+        | QuestionStepBodyInterface
+        | ProblemStepBodyInterface
 }
 
 export interface UserStepEnrollInterface {
@@ -26,6 +30,7 @@ export interface VideoStepBodyInterface {
 export interface QuestionStepBodyInterface {
     id: number
     text: EditorDataInterface
+    userAnswers: UserAnswerForQuestionStepInterface[]
 }
 
 export interface ProblemStepBodyInterface {
@@ -34,4 +39,12 @@ export interface ProblemStepBodyInterface {
     input: EditorDataInterface
     output: EditorDataInterface
     notes: EditorDataInterface
+}
+
+export interface UserAnswerForQuestionStepInterface {
+    id: number
+    user: number
+    question: number
+    answer: string
+    is_correct: boolean
 }
