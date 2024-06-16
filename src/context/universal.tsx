@@ -155,10 +155,10 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
 
             if (step) {
                 const stepBody = step?.body as ProblemStepBodyInterface
-                if (stepBody.userProblems) {
-                    stepBody.userProblems.push(userAnswerForProblemStep)
+                if (stepBody.userAnswers) {
+                    stepBody.userAnswers.push(userAnswerForProblemStep)
                 } else {
-                    stepBody.userProblems = [userAnswerForProblemStep]
+                    stepBody.userAnswers = [userAnswerForProblemStep]
                 }
 
                 step.userEnroll = userEnroll
@@ -167,24 +167,6 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         })
         mutateResource(newResourse)
     }
-
-    const findRefetch = async () => {
-        console.log('SSSSSSS')
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-        const steps = resource()?.steps.find(
-            (step) => step.stepType === 'problemstep' && step.userEnroll?.status === 'WT',
-        )
-        if (steps) {
-            console.log('!!!')
-            await refetchResource()
-        }
-    }
-
-    createEffect(() => {
-        if (resource()) {
-            findRefetch()
-        }
-    })
 
     const url = props.pageType
     const value = {

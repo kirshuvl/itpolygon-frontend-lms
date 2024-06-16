@@ -2,6 +2,7 @@ import { type Component, Show } from 'solid-js'
 
 import { A, useNavigate } from '@solidjs/router'
 import clsx from 'clsx'
+import { ProgressBarVertical } from 'itpolygon-ui-dev'
 import type { SeminarDashboardInterface } from '../../types/dashboard'
 import styles from './SeminarCard.module.scss'
 
@@ -43,6 +44,9 @@ export const SeminarCard: Component<Props> = (props) => {
                     </A>
                 </div>
             </div>
+            <ProgressBarVertical
+                percent={(seminar.userStatistics.completedSteps / seminar.userStatistics.totalSteps) * 100}
+            />
         </div>
     )
 }

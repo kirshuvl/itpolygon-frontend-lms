@@ -8,6 +8,10 @@
     cursor: pointer;
     align-items: center;
 
+    &:hover {
+        background-color: var(--slate-100);
+    }
+
     .icon {
         display: flex;
         background-color: var(--slate-200);
@@ -40,5 +44,10 @@
             font-size: 0.75rem;
             line-height: 1rem;
         }
+    }
+
+    &.progress {
+        padding: 10px;
+        background-color: red;
     }
 }

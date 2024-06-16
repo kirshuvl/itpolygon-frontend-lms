@@ -8,6 +8,10 @@
     cursor: pointer;
     align-items: center;
 
+    &:hover {
+        background-color: var(--slate-100);
+    }
+
     .icon {
         display: flex;
         background-color: var(--slate-200);
