@@ -36,9 +36,13 @@ export const HomeworkCard: Component<Props> = (props) => {
             </div>
             <div class={clsx(styles.content)}>
                 {homework.course.title}
-                <div class={clsx(styles.line)}>{formattedDate}</div>
+                <div class={clsx(styles.line)}>Срок сдачи: {formattedDate}</div>
             </div>
-            <ProgressBarVertical percent={50} />
+            <ProgressBarVertical
+                percent={
+                    (homework.userStatistics.completedSteps / homework.userStatistics.totalSteps) * 100
+                }
+            />
         </div>
     )
 }

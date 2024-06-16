@@ -31,6 +31,7 @@ export interface HomeworkDashboardInterface {
     date: Date
     teacher: UserCommonInterface
     course: CourseCommonInterface
+    userStatistics: userStatistics
 }
 
 export interface SeminarDashboardInterface extends HomeworkDashboardInterface {}

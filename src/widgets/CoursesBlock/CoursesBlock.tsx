@@ -1,5 +1,6 @@
 import { TitleBlock } from 'itpolygon-ui-dev'
 import { type Component, For, Show, onMount } from 'solid-js'
+
 import { CourseCard } from '../../components/CourseCard/CourseCard'
 import { CourseCardSkeleton } from '../../components/CourseCard/Skeleton/CourseCard.Skeleton'
 import { EmptyData } from '../../components/EmptyData/EmptyData'
