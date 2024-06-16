@@ -22,7 +22,7 @@ export const TopicsBlock: ParentComponent = () => {
                 <TopicsBlockBodySkeleton />
             </Show>
             <Show when={courseCurriculum() && courseCurriculum()?.topics.length === 0}>
-                <EmptyData text="У вас нет ни одного курса" />
+                <EmptyData text="В курсе еще нет тем :(" />
             </Show>
             <Show when={courseCurriculum() && courseCurriculum()?.topics.length !== 0}>
                 <For each={courseCurriculum()?.topics}>

@@ -1,6 +1,6 @@
 import type { UserCommonInterface } from './users'
 
-interface userStatistics {
+export interface userStatistics {
     totalSteps: number
     completedSteps: number
     theoreticalSteps: {
