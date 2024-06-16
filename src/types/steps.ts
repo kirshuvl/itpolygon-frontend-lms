@@ -39,7 +39,9 @@ export interface ProblemStepBodyInterface {
     input: EditorDataInterface
     output: EditorDataInterface
     notes: EditorDataInterface
-    userProblems: UserAnswerForProblemStepInterface[]
+    cpuTime: number
+    memody: number
+    userAnswers: UserAnswerForProblemStepInterface[]
 }
 
 export interface UserAnswerForQuestionStepInterface {

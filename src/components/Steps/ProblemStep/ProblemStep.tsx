@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { Button } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
-import { For, createSignal } from 'solid-js'
+import { For, Show, createSignal } from 'solid-js'
 import type { Component } from 'solid-js'
 import * as yup from 'yup'
 import { useResourseStateContext } from '../../../context/universal'
@@ -102,14 +102,20 @@ export const ProblemStep: Component = () => {
                     </div>
                 </div>
             </div>
-            <FileInput name="answer" formHandler={formHandler} />
-            <Button
-                value="Ответить"
-                onClick={() => buttonClick()}
-                disabled={formHandler.isFormInvalid()}
-                loading={isLoading()}
-            />
-            <p>{JSON.stringify(stepBody().userProblems)}</p>
+            <Show
+                when={
+                    currentStep()?.userEnroll?.status !== 'OK' && currentStep()?.userEnroll?.status !== 'WT'
+                }
+            >
+                <FileInput name="answer" formHandler={formHandler} />
+                <Button
+                    value="Ответить"
+                    onClick={() => buttonClick()}
+                    disabled={formHandler.isFormInvalid()}
+                    loading={isLoading()}
+                />
+            </Show>
+            <p>{JSON.stringify(stepBody().userAnswers)}</p>
         </>
     )
 }

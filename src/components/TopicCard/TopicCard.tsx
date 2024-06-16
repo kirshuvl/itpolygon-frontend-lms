@@ -15,14 +15,20 @@ type Props = {
 
 export const TopicCard: ParentComponent<Props> = (props) => {
     const topic = props.topic
-    const [isOpen, setIsOpen] = createSignal<boolean>(true)
+    const [isOpen, setIsOpen] = createSignal<boolean>(
+        !(topic.userStatistics.completedSteps === topic.userStatistics.totalSteps),
+    )
     return (
         <>
             <div class={clsx(styles.card)} onclick={() => setIsOpen(!isOpen())}>
                 <div class={clsx(styles.index)}>{props.index}</div>
                 <div class={clsx(styles.content)}>{topic.title}</div>
-                <div class={clsx(styles.info)}>10 / 12</div>
-                <ProgressBarVertical percent={40} />
+                <div class={clsx(styles.info)}>
+                    {topic.userStatistics.completedSteps} / {topic.userStatistics.totalSteps}
+                </div>
+                <ProgressBarVertical
+                    percent={(topic.userStatistics.completedSteps / topic.userStatistics.totalSteps) * 100}
+                />
             </div>
             <Show when={isOpen()}>
                 <div class={clsx(styles.lessons)}>

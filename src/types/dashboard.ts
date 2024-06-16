@@ -1,6 +1,6 @@
 import type { UserCommonInterface } from './users'
 
-interface userStatistics {
+export interface userStatistics {
     totalSteps: number
     completedSteps: number
     theoreticalSteps: {
@@ -31,6 +31,7 @@ export interface HomeworkDashboardInterface {
     date: Date
     teacher: UserCommonInterface
     course: CourseCommonInterface
+    userStatistics: userStatistics
 }
 
 export interface SeminarDashboardInterface extends HomeworkDashboardInterface {}

@@ -18,8 +18,12 @@ export const LessonCard: ParentComponent<Props> = (props) => {
         <div class={clsx(styles.card)} onclick={() => navigate(`/lesson/${lesson.id}/`)}>
             <div class={clsx(styles.index)}>{props.index}</div>
             <div class={clsx(styles.content)}>{lesson.title}</div>
-            <div class={clsx(styles.info)}>10 / 12</div>
-            <ProgressBarVertical percent={40} />
+            <div class={clsx(styles.info)}>
+                {lesson.userStatistics.completedSteps} / {lesson.userStatistics.totalSteps}
+            </div>
+            <ProgressBarVertical
+                percent={(lesson.userStatistics.completedSteps / lesson.userStatistics.totalSteps) * 100}
+            />
         </div>
     )
 }
