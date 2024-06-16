@@ -58,7 +58,6 @@ export const QuestionStep: Component = () => {
                 </Show>
             </div>
             <div>
-                Ваши ответы
                 <For each={stepBody()?.userAnswers}>{(answer) => <UserAnswerCard answer={answer} />}</For>
             </div>
         </>
