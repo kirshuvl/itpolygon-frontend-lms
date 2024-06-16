@@ -109,7 +109,7 @@ export const ProblemStep: Component = () => {
                 disabled={formHandler.isFormInvalid()}
                 loading={isLoading()}
             />
-            <p>{JSON.stringify(stepBody().userProblems)}</p>
+            <p>{JSON.stringify(stepBody().userAnswers)}</p>
         </>
     )
 }
