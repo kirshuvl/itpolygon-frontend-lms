@@ -7,7 +7,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite --host 0.0.0.0",
-        "server": "vite server",
+        "preview": "vite preview",
         "start": "vite",
         "typecheck": "tsc --noEmit",
         "typecheck:watch": "tsc --noEmit --watch",
