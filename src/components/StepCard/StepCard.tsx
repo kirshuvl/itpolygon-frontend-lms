@@ -53,6 +53,7 @@ export const StepCard: Component<Props> = (props) => {
             if (currentStep() && currentStep()?.userEnroll === null) {
                 setIsUpdating(true)
                 createUserStepEnroll({ stepId: step.id })
+                console.log('111111')
                 setIsUpdating(false)
             }
         }
@@ -70,6 +71,11 @@ export const StepCard: Component<Props> = (props) => {
                 onClick={buttonClick}
             >
                 <div class={clsx(styles.icon)}>
+                    {JSON.stringify(isUpdating())}{' '}
+                    <Show when={isUpdating()}>
+                        <IconLoading class={clsx(styles.loading)} />
+                        !!!!!!!!!!!!!!!!!
+                    </Show>
                     <Switch>
                         <Match when={step.stepType === 'textstep'}>
                             <IconText class={clsx(styles.svg)} />
@@ -119,6 +125,7 @@ export const StepCard: Component<Props> = (props) => {
                 </div>
                 <Show when={isUpdating()}>
                     <IconLoading class={clsx(styles.loading)} />
+                    !!!!!!!!!!!!!!!!!
                 </Show>
             </div>
         </>

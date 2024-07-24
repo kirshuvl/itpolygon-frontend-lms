@@ -9,7 +9,7 @@ export const TextStep: Component = () => {
         currentStep,
         actions: { updateUserStepEnroll },
     } = useResourseStateContext()
-    const stepBody = currentStep()?.body as TextStepBodyInterface
+    const stepBody = () => currentStep()?.body as TextStepBodyInterface
     const [isLoading, setIsLoading] = createSignal(false)
     const buttonClick = async () => {
         setIsLoading(true)
@@ -20,7 +20,7 @@ export const TextStep: Component = () => {
     }
     return (
         <>
-            <For each={stepBody.text.blocks}>{(block) => <EditorBlock block={block} />}</For>
+            <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
             <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
                 <Button
                     onClick={() => buttonClick()}
