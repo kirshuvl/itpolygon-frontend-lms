@@ -48,11 +48,12 @@ export const StepCard: Component<Props> = (props) => {
         return status ? stylesMap[status] : 'none'
     }
 
-    createEffect(() => {
+    createEffect(async () => {
         if (currentStep() && currentStep()?.id === step.id) {
             if (currentStep() && currentStep()?.userEnroll === null) {
                 setIsUpdating(true)
                 createUserStepEnroll({ stepId: step.id })
+                await new Promise((resolve) => setTimeout(resolve, 2000))
                 setIsUpdating(false)
             }
         }
@@ -77,7 +78,12 @@ export const StepCard: Component<Props> = (props) => {
                         <Match when={step.stepType === 'videostep'}>
                             <IconVideo class={clsx(styles.svg)} />
                         </Match>
-                        <Match when={step.stepType === 'questionstep'}>
+                        <Match
+                            when={
+                                step.stepType === 'questionstep' ||
+                                step.stepType === 'singlechoicequestionstep'
+                            }
+                        >
                             <IconQuestion class={clsx(styles.svg)} />
                         </Match>
                         <Match when={step.stepType === 'problemstep'}>

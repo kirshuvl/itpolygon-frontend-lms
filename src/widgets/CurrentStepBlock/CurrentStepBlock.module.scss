@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.view {
+    font-size: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.25rem;
+}

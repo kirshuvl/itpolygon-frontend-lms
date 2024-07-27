@@ -3,8 +3,14 @@ import type { EditorDataInterface } from './editor'
 export interface StepInterface {
     id: number
     title: string | null
-    stepType: 'textstep' | 'videostep' | 'questionstep' | 'problemstep'
+    stepType: 'textstep' | 'videostep' | 'questionstep' | 'singlechoicequestionstep' | 'problemstep'
+    liked_by: number
+    bookmarked_by: number
+    viewed_by: number
     userEnroll: UserStepEnrollInterface | null
+    userLike: {
+        id: number
+    } | null
     body:
         | TextStepBodyInterface
         | VideoStepBodyInterface
