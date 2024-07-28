@@ -9,6 +9,7 @@ import { LessonContentSkeleton } from '../../screens/lesson/LessonContentSkeleto
 import { TopicBlockHeaderSkeleton } from '../TopicsBlock/Skeleton/TopicsBlock.Skeleton'
 
 import clsx from 'clsx'
+import { SingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/SingleChoiceQuestionStep'
 import styles from './CurrentStepBlock.module.scss'
 
 export const CurrentStepBlock: Component = () => {
@@ -93,6 +94,9 @@ export const CurrentStepBlock: Component = () => {
                 </Match>
                 <Match when={currentStep()?.stepType === 'questionstep'}>
                     <QuestionStep />
+                </Match>
+                <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                    <SingleChoiceQuestionStep />
                 </Match>
                 <Match when={currentStep()?.stepType === 'problemstep'}>
                     <ProblemStep />
