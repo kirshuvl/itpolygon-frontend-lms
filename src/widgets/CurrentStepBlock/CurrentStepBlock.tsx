@@ -1,5 +1,5 @@
 import { ActionButton, IconBookmark, IconHeart, IconHeartSolid, TitleBlock } from 'itpolygon-ui-dev'
-import { type Component, Match, Show, Switch, createSignal } from 'solid-js'
+import { type Component, Match, Show, Switch, createEffect, createSignal, on } from 'solid-js'
 import { ProblemStep } from '../../components/Steps/ProblemStep/ProblemStep'
 import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
 import { TextStep } from '../../components/Steps/TextStep/TextStep'
@@ -19,6 +19,12 @@ export const CurrentStepBlock: Component = () => {
     } = useResourseStateContext()
 
     const [isLikeUpdating, setIsLikeUpdating] = createSignal(false)
+
+    createEffect(
+        on(currentStep, () => {
+            setIsLikeUpdating(false)
+        }),
+    )
 
     const createLike = async () => {
         setIsLikeUpdating(true)
