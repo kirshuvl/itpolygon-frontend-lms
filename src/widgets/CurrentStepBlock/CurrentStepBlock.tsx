@@ -28,14 +28,21 @@ export const CurrentStepBlock: Component = () => {
 
     const createLike = async () => {
         setIsLikeUpdating(true)
-        await createUserStepLike({ stepId: currentStep()?.id })
+        const stepId = currentStep()?.id
+        if (stepId !== undefined) {
+            await createUserStepLike({ stepId: stepId })
+        }
         setIsLikeUpdating(false)
     }
 
     const deleteLike = async () => {
         setIsLikeUpdating(true)
+        const stepId = currentStep()?.id
+        const userLikeId = currentStep()?.userLike?.id
+        if (stepId !== undefined && userLikeId !== undefined) {
+            await deleteUserStepLike({ stepId: stepId, userStepLikeId: userLikeId })
+        }
 
-        await deleteUserStepLike({ stepId: currentStep()?.id, userStepLikeId: currentStep()?.userLike?.id })
         setIsLikeUpdating(false)
     }
 
