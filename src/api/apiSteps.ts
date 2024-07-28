@@ -46,4 +46,44 @@ export const apiSteps = {
             throw error
         }
     },
+    createUserStepView: async ({ stepId }: { stepId: number }): Promise<{ viewed_by: number }> => {
+        try {
+            const response = await axiosPrivate.post(
+                '/lms/steps/views/',
+                createFormData({ step: stepId, source: 'LMS' }),
+            )
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[createUserStepView] ${error}`)
+            throw error
+        }
+    },
+    createUserStepLike: async ({
+        stepId,
+    }: { stepId: number }): Promise<{ userLike: { id: number }; liked_by: number }> => {
+        try {
+            const response = await axiosPrivate.post(
+                '/lms/steps/likes/',
+                createFormData({ step: stepId, source: 'LMS' }),
+            )
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[createUserStepLike] ${error}`)
+            throw error
+        }
+    },
+    deleteUserStepLike: async ({
+        userStepLikeId,
+    }: { userStepLikeId: number }): Promise<{ liked_by: number }> => {
+        try {
+            const response = await axiosPrivate.delete(`/lms/steps/likes/${userStepLikeId}/`)
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[deleteUserStepLike] ${error}`)
+            throw error
+        }
+    },
 }

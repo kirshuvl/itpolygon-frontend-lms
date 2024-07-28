@@ -32,6 +32,9 @@ type ResourseContextType<T> = {
         mutateResource: Setter<T | undefined>
         refetchResource: () => T | Promise<T | undefined> | null | undefined
         createUserStepEnroll: ({ stepId }: { stepId: number }) => void
+        createUserStepView: ({ stepId }: { stepId: number }) => void
+        createUserStepLike: ({ stepId }: { stepId: number }) => void
+        deleteUserStepLike: ({ stepId, userStepLikeId }: { stepId: number; userStepLikeId: number }) => void
         updateUserStepEnroll: ({ status }: { status: string }) => void
         createUserAnswerForQuestionStep: ({ answer }: { answer: string }) => void
         createUserAnswerForProblemStep: ({ code }: { code: string }) => void
@@ -47,6 +50,8 @@ type ResourseProviderType = {
 
 export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) => {
     const params = useParams<{ resourceId: string; stepId?: string }>()
+
+    const [lastUpdate, setLastUpdate] = createSignal()
 
     const fetchResource = ({
         resourseId,
@@ -81,6 +86,10 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             step = resource()?.steps.find((step) => step.id.toString() === params.stepId)
         }
         setCurrentStep(step)
+        if (step && step?.id !== lastUpdate()) {
+            createUserStepView({ stepId: step?.id })
+            setLastUpdate(step?.id)
+        }
     })
 
     const createUserStepEnroll = async ({ stepId }: { stepId: number }) => {
@@ -109,6 +118,52 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
                 step.userEnroll = enroll
             }
         })
+        mutateResource(newResourse)
+    }
+
+    const createUserStepView = async ({ stepId }: { stepId: number }) => {
+        const view = await apiSteps.createUserStepView({ stepId })
+
+        const newResourse = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                step.viewed_by = view.viewed_by
+            }
+        })
+
+        mutateResource(newResourse)
+    }
+
+    const createUserStepLike = async ({ stepId }: { stepId: number }) => {
+        const like = await apiSteps.createUserStepLike({ stepId })
+
+        const newResourse = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                step.liked_by = like.liked_by
+                step.userLike = like.userLike
+            }
+        })
+
+        mutateResource(newResourse)
+    }
+
+    const deleteUserStepLike = async ({
+        stepId,
+        userStepLikeId,
+    }: { stepId: number; userStepLikeId: number }): Promise<void> => {
+        const info = await apiSteps.deleteUserStepLike({ userStepLikeId })
+        const newResourse = produce(resource(), (draftState) => {
+            const step = draftState?.steps.find((step) => step.id === stepId)
+
+            if (step) {
+                step.userLike = null
+                step.liked_by = info.liked_by
+            }
+        })
+
         mutateResource(newResourse)
     }
 
@@ -178,6 +233,9 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             mutateResource,
             refetchResource,
             createUserStepEnroll,
+            createUserStepView,
+            createUserStepLike,
+            deleteUserStepLike,
             updateUserStepEnroll,
             createUserAnswerForQuestionStep,
             createUserAnswerForProblemStep,
