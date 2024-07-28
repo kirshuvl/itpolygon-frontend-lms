@@ -41,3 +41,15 @@
         background-color: var(--slate-400);
     }
 }
+
+.answers {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.answer {
+    background-color: var(--slate-100);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}

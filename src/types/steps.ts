@@ -68,5 +68,5 @@ export interface UserAnswerForProblemStepInterface {
     id: number
     language: string
     verdict: string
-    cputime: number
+    cpuTime: number
 }

@@ -130,21 +130,36 @@ export const ProblemStep: Component = () => {
                         </For>
                     </div>
                 </div>
+                <Show
+                    when={
+                        currentStep()?.userEnroll?.status !== 'OK' &&
+                        currentStep()?.userEnroll?.status !== 'WT'
+                    }
+                >
+                    <FileInput name="answer" formHandler={formHandler} />
+                    <Button
+                        value="Ответить"
+                        onClick={() => buttonClick()}
+                        disabled={formHandler.isFormInvalid()}
+                        loading={isLoading()}
+                    />
+                </Show>
+                <Show when={stepBody().userAnswers.length !== 0}>
+                    <div class={clsx(styles.block)}>
+                        <div class={clsx(styles.header)}>Мои решения:</div>
+                        <div class={clsx(styles.answers)}>
+                            <For each={stepBody().userAnswers}>
+                                {(answer) => (
+                                    <div class={clsx(styles.answer)}>
+                                        {answer.id} | {answer.language} | {answer.cpuTime} |{' '}
+                                        {answer.verdict}
+                                    </div>
+                                )}
+                            </For>
+                        </div>
+                    </div>
+                </Show>
             </div>
-            <Show
-                when={
-                    currentStep()?.userEnroll?.status !== 'OK' && currentStep()?.userEnroll?.status !== 'WT'
-                }
-            >
-                <FileInput name="answer" formHandler={formHandler} />
-                <Button
-                    value="Ответить"
-                    onClick={() => buttonClick()}
-                    disabled={formHandler.isFormInvalid()}
-                    loading={isLoading()}
-                />
-            </Show>
-            <p>{JSON.stringify(stepBody().userAnswers)}</p>
         </>
     )
 }
