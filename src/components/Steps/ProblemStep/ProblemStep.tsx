@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Button } from 'itpolygon-ui-dev'
+import { ActionButton, Button, IconPlus } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
 import { For, Show, createSignal } from 'solid-js'
@@ -63,6 +63,10 @@ export const ProblemStep: Component = () => {
         })
     }
 
+    const copyToClipboard = async (text: string) => {
+        await navigator.clipboard.writeText(text)
+    }
+
     const buttonClick = async () => {
         setIsLoading(true)
         const userCode = await printFile(formData().answer)
@@ -99,6 +103,31 @@ export const ProblemStep: Component = () => {
                     <div class={clsx(styles.header)}>Примечания:</div>
                     <div>
                         <For each={stepBody().notes.blocks}>{(block) => <EditorBlock block={block} />}</For>
+                    </div>
+                </div>
+                <div class={clsx(styles.block)}>
+                    <div class={clsx(styles.header)}>Тесты:</div>
+                    <div class={clsx(styles.tests)}>
+                        <For each={stepBody().stepTests}>
+                            {(test) => (
+                                <div class={clsx(styles.row)}>
+                                    <div class={clsx(styles.test)}>
+                                        <div>{test.input}</div>
+                                        <ActionButton
+                                            icon={IconPlus}
+                                            onClick={() => copyToClipboard(test.input)}
+                                        />
+                                    </div>
+                                    <div class={clsx(styles.test)}>
+                                        <div>{test.output}</div>
+                                        <ActionButton
+                                            icon={IconPlus}
+                                            onClick={() => copyToClipboard(test.output)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </For>
                     </div>
                 </div>
             </div>

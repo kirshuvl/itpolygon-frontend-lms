@@ -15,3 +15,29 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+.tests {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.test {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width: 50%;
+    background-color: var(--slate-200);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    white-space: pre-wrap;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--slate-400);
+    }
+}
