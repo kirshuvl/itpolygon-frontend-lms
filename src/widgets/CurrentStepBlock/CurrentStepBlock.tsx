@@ -1,4 +1,4 @@
-import { ActionButton, IconBookmark, IconHeart, IconHeartSolid, TitleBlock } from 'itpolygon-ui-dev'
+import { ActionButton, IconHeart, IconHeartSolid, TitleBlock } from 'itpolygon-ui-dev'
 import { type Component, Match, Show, Switch, createEffect, createSignal, on } from 'solid-js'
 import { ProblemStep } from '../../components/Steps/ProblemStep/ProblemStep'
 import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
@@ -54,13 +54,13 @@ export const CurrentStepBlock: Component = () => {
                     <div class={clsx(styles.header)}>
                         <div>{currentStep()?.title ?? 'Нет заголовка'}</div>
                         <div class={clsx(styles.buttons)}>
-                            {currentStep()?.liked_by}
                             <Show
                                 when={currentStep()?.userLike !== null}
                                 fallback={
                                     <ActionButton
                                         icon={IconHeart}
                                         iconLoading={IconHeart}
+                                        text={currentStep()?.liked_by}
                                         loading={isLikeUpdating()}
                                         onClick={createLike}
                                         variant="danger"
@@ -70,12 +70,12 @@ export const CurrentStepBlock: Component = () => {
                                 <ActionButton
                                     icon={IconHeartSolid}
                                     iconLoading={IconHeartSolid}
+                                    text={currentStep()?.liked_by}
                                     loading={isLikeUpdating()}
                                     onClick={deleteLike}
                                     variant="danger"
                                 />
                             </Show>
-                            <ActionButton icon={IconBookmark} />
                         </div>
                     </div>
                 }

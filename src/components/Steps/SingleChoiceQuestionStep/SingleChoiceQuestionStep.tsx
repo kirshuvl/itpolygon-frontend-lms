@@ -1,7 +1,8 @@
-import { type Component, For, Show, createSignal } from 'solid-js'
+import { type Component, For, createSignal } from 'solid-js'
 
 import clsx from 'clsx'
 import { Button } from 'itpolygon-ui-dev'
+import { Radios } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
 import * as yup from 'yup'
@@ -11,15 +12,15 @@ import { EditorBlock } from '../../Editor/EditorBlock'
 import styles from './SingleChoiceQuestionStep.module.scss'
 
 type UserAnswer = {
-    answer: string
+    answer: number
 }
 
-export const userSchema: yup.Schema<UserAnswer> = yup.object({
-    answer: yup.string().required('Введите ответ'),
+export const userAnswerSchema: yup.Schema<UserAnswer> = yup.object({
+    answer: yup.number().required('Введите ответ'),
 })
 
 export const SingleChoiceQuestionStep: Component = () => {
-    const formHandler = useFormHandler(yupSchema(userSchema))
+    const formHandler = useFormHandler(yupSchema(userAnswerSchema))
     const { formData } = formHandler
 
     const {
@@ -29,34 +30,28 @@ export const SingleChoiceQuestionStep: Component = () => {
     const stepBody = () => currentStep()?.body as SingleChoiceQuestionStepBodyInterface
 
     const [isLoading, setIsLoading] = createSignal(false)
-    const [userAnswer, setUserAnswer] = createSignal<number>()
 
     const buttonClick = async () => {
         setIsLoading(true)
-        if (userAnswer() !== undefined) {
-            await createUserAnswerForSingleChoiceQuestionStep({ answerId: userAnswer() })
-        }
+        await createUserAnswerForSingleChoiceQuestionStep({ answerId: formData().answer })
+        console.log(formData().answer)
         setIsLoading(false)
     }
 
-    const radioClick = (answerId: number) => {
-        setUserAnswer(answerId)
-    }
+
+
+    const transformedData = stepBody().stepAnswers.map((answer) => ({
+        value: answer.id,
+        label: answer.answer,
+    }))
+
     return (
         <>
             <div class={clsx(styles.body)}>
                 <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
-                <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
-                    <For each={stepBody().stepAnswers}>
-                        {(answer) => (
-                            <div>
-                                <input type="radio" name="question" onClick={() => radioClick(answer.id)} />
-                                <label>{answer.answer}</label>
-                            </div>
-                        )}
-                    </For>
-                    <Button onClick={() => buttonClick()} />
-                </Show>
+                <Radios options={transformedData} name="answer"
+                    formHandler={formHandler} />
+                <Button value="Ответить" valueLoading="Мы проверяем твой ответ" onClick={() => buttonClick()} loading={isLoading()} />
                 <For each={stepBody().userAnswers}>{(answer) => <div>{answer.answer.answer}</div>}</For>
             </div>
         </>

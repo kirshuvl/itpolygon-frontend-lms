@@ -1,7 +1,7 @@
 import { type Component, For, Show, createSignal } from 'solid-js'
 
 import clsx from 'clsx'
-import { Button, InputField } from 'itpolygon-ui-dev'
+import { Button, TextInput } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
 import * as yup from 'yup'
@@ -42,7 +42,7 @@ export const QuestionStep: Component = () => {
                 <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
                 <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
                     <div class={clsx(styles.row)}>
-                        <InputField
+                        <TextInput
                             type="text"
                             placeholder="Введите пароль"
                             name="answer"
