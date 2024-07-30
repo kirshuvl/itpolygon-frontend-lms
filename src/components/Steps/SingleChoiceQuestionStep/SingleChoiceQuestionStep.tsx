@@ -52,7 +52,6 @@ export const SingleChoiceQuestionStep: Component = () => {
                 <Radios options={transformedData} name="answer"
                     formHandler={formHandler} />
                 <Button value="Ответить" valueLoading="Мы проверяем твой ответ" onClick={() => buttonClick()} loading={isLoading()} />
-                <For each={stepBody().userAnswers}>{(answer) => <div>{answer.answer.answer}</div>}</For>
             </div>
         </>
     )
