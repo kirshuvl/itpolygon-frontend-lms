@@ -107,14 +107,14 @@ export const CurrentStepBlock: Component = () => {
                 </Switch>
 
             </div>
-            <Show when={currentStep()?.stepType === 'singlechoicequestionstep'}>
-                <div class={clsx(styles.card)}>
-                    <Switch>
-                        <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
-                            <UserAnswerForSingleChoiceQuestionStep />
-                        </Match>
-                    </Switch>
-                </div>
+            <Show when={(currentStep()?.stepType === 'singlechoicequestionstep')}>
+
+                <Switch>
+                    <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                        <UserAnswerForSingleChoiceQuestionStep />
+                    </Match>
+                </Switch>
+
             </Show>
         </div>
     )

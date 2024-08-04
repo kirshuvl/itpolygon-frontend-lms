@@ -1,4 +1,4 @@
-import { type Component, For, createSignal } from 'solid-js'
+import { type Component, For, Show, createSignal } from 'solid-js'
 
 import clsx from 'clsx'
 import { Button } from 'itpolygon-ui-dev'
@@ -34,8 +34,8 @@ export const SingleChoiceQuestionStep: Component = () => {
     const buttonClick = async () => {
         setIsLoading(true)
         await createUserAnswerForSingleChoiceQuestionStep({ answerId: formData().answer })
-        console.log(formData().answer)
         setIsLoading(false)
+        formHandler.resetForm()
     }
 
 
@@ -49,9 +49,11 @@ export const SingleChoiceQuestionStep: Component = () => {
         <>
             <div class={clsx(styles.body)}>
                 <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
-                <Radios options={transformedData} name="answer"
-                    formHandler={formHandler} />
-                <Button value="Ответить" valueLoading="Мы проверяем твой ответ" onClick={() => buttonClick()} loading={isLoading()} />
+                <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
+                    <Radios options={transformedData} name="answer"
+                        formHandler={formHandler} />
+                    <Button value="Ответить" valueLoading="Мы проверяем твой ответ" onClick={() => buttonClick()} loading={isLoading()} />
+                </Show>
             </div>
         </>
     )

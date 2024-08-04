@@ -218,7 +218,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
                 if (step) {
                     const stepBody = step?.body as SingleChoiceQuestionStepBodyInterface
                     if (stepBody.userAnswers) {
-                        stepBody.userAnswers.push(userAnswer)
+                        stepBody.userAnswers.unshift(userAnswer)
                     } else {
                         stepBody.userAnswers = [userAnswer]
                     }
