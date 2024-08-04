@@ -10,6 +10,7 @@ import { TopicBlockHeaderSkeleton } from '../TopicsBlock/Skeleton/TopicsBlock.Sk
 
 import clsx from 'clsx'
 import { UserAnswerForProblemStep } from '../../components/Steps/ProblemStep/UserAnswerForProblemStep'
+
 import { SingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/SingleChoiceQuestionStep'
 import { UserAnswerForSingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/UserAnswerForSingleChoiceQuestionStep'
 import styles from './CurrentStepBlock.module.scss'
@@ -106,7 +107,6 @@ export const CurrentStepBlock: Component = () => {
                     </Match>
                 </Switch>
             </div>
-
             <Switch>
                 <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
                     <UserAnswerForSingleChoiceQuestionStep />
