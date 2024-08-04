@@ -38,8 +38,6 @@ export const SingleChoiceQuestionStep: Component = () => {
         formHandler.resetForm()
     }
 
-
-
     const transformedData = stepBody().stepAnswers.map((answer) => ({
         value: answer.id,
         label: answer.answer,
@@ -50,9 +48,13 @@ export const SingleChoiceQuestionStep: Component = () => {
             <div class={clsx(styles.body)}>
                 <For each={stepBody().text.blocks}>{(block) => <EditorBlock block={block} />}</For>
                 <Show when={currentStep()?.userEnroll?.status !== 'OK'}>
-                    <Radios options={transformedData} name="answer"
-                        formHandler={formHandler} />
-                    <Button value="Ответить" valueLoading="Мы проверяем твой ответ" onClick={() => buttonClick()} loading={isLoading()} />
+                    <Radios options={transformedData} name="answer" formHandler={formHandler} />
+                    <Button
+                        value="Ответить"
+                        valueLoading="Мы проверяем твой ответ"
+                        onClick={() => buttonClick()}
+                        loading={isLoading()}
+                    />
                 </Show>
             </div>
         </>

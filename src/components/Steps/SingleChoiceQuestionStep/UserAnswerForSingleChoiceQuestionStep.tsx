@@ -20,11 +20,7 @@ export const UserAnswerForSingleChoiceQuestionStep: Component = () => {
             <Show when={stepBody().userAnswers.length !== 0}>
                 <div class={clsx(styles.card)}>
                     <TitleBlock title={'Мои ответы'} />
-                    <For each={stepBody().userAnswers}>{
-                        (answer) =>
-                            <UserAnswer answer={answer} />
-                    }
-                    </For>
+                    <For each={stepBody().userAnswers}>{(answer) => <UserAnswer answer={answer} />}</For>
                 </div>
             </Show>
         </>
