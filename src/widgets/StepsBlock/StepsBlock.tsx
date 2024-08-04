@@ -26,25 +26,27 @@ export const StepsBlock: Component = () => {
                 title="Шаги"
                 buttons={
                     <>
-                        <ActionButton
-                            icon={IconChevronLeft}
-                            onClick={() => {
-                                if (steps() && left() > 0) {
-                                    setLeft(() => left() - 6)
-                                    setRight(() => right() - 6)
-                                }
-                            }}
-                            disabled={left() <= 0}
-                        />
-                        <ActionButton
-                            icon={IconChevronRight}
-                            onClick={() => {
-                                if (right() < resource()?.steps.length) {
-                                    setLeft(() => left() + 6)
-                                    setRight(() => right() + 6)
-                                }
-                            }}
-                        />
+                        <Show when={resource()?.steps.length > 6}>
+                            <ActionButton
+                                icon={IconChevronLeft}
+                                onClick={() => {
+                                    if (steps() && left() > 0) {
+                                        setLeft(() => left() - 6)
+                                        setRight(() => right() - 6)
+                                    }
+                                }}
+                                disabled={left() <= 0}
+                            />
+                            <ActionButton
+                                icon={IconChevronRight}
+                                onClick={() => {
+                                    if (right() < resource()?.steps.length) {
+                                        setLeft(() => left() + 6)
+                                        setRight(() => right() + 6)
+                                    }
+                                }}
+                            />
+                        </Show>
                         <ActionButton icon={IconLock} onClick={() => setIsHide(() => !isHide())} />
                     </>
                 }
