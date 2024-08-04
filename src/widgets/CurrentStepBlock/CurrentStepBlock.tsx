@@ -9,6 +9,7 @@ import { LessonContentSkeleton } from '../../screens/lesson/LessonContentSkeleto
 import { TopicBlockHeaderSkeleton } from '../TopicsBlock/Skeleton/TopicsBlock.Skeleton'
 
 import clsx from 'clsx'
+import { UserAnswerForProblemStep } from '../../components/Steps/ProblemStep/UserAnswerForProblemStep'
 import { SingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/SingleChoiceQuestionStep'
 import { UserAnswerForSingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/UserAnswerForSingleChoiceQuestionStep'
 import styles from './CurrentStepBlock.module.scss'
@@ -105,13 +106,16 @@ export const CurrentStepBlock: Component = () => {
                     </Match>
                 </Switch>
             </div>
-            <Show when={currentStep()?.stepType === 'singlechoicequestionstep'}>
-                <Switch>
-                    <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
-                        <UserAnswerForSingleChoiceQuestionStep />
-                    </Match>
-                </Switch>
-            </Show>
+
+            <Switch>
+                <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                    <UserAnswerForSingleChoiceQuestionStep />
+                </Match>
+                <Match when={currentStep()?.stepType === 'problemstep'}>
+                    <UserAnswerForProblemStep />
+                </Match>
+            </Switch>
+
         </div>
     )
 }

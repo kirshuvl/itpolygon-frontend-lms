@@ -12,10 +12,10 @@ export interface StepInterface {
         id: number
     } | null
     body:
-        | TextStepBodyInterface
-        | VideoStepBodyInterface
-        | QuestionStepBodyInterface
-        | ProblemStepBodyInterface
+    | TextStepBodyInterface
+    | VideoStepBodyInterface
+    | QuestionStepBodyInterface
+    | ProblemStepBodyInterface
 }
 
 export interface UserStepEnrollInterface {
@@ -90,4 +90,5 @@ export interface UserAnswerForProblemStepInterface {
     language: string
     verdict: string
     cpuTime: number
+    created_at: Date
 }

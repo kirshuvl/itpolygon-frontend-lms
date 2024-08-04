@@ -1,20 +1,15 @@
-import clsx from 'clsx'
-import { IconHeart, TitleBlock } from 'itpolygon-ui-dev'
-import { ActionButton } from 'itpolygon-ui-dev'
-import { type Component, For } from 'solid-js'
-import { Show } from 'solid-js'
+import { ActionButton, IconHeart, TitleBlock } from 'itpolygon-ui-dev'
+import { type Component, For, Show } from 'solid-js'
 import { useResourseStateContext } from '../../../context/universal'
-import type {
-    SingleChoiceQuestionStepBodyInterface,
-    UserAnserForSingleChoiceSuestionStepInterface,
-} from '../../../types/steps'
-import styles from './UserAnswerForSingleChoiceQuestionStep.module.scss'
+import type { ProblemStepBodyInterface, UserAnswerForProblemStepInterface } from '../../../types/steps'
 
-export const UserAnswerForSingleChoiceQuestionStep: Component = () => {
+import clsx from 'clsx'
+import styles from './UserAnswerForProblemStep.module.scss'
+
+export const UserAnswerForProblemStep: Component = () => {
     const { currentStep } = useResourseStateContext()
 
-    const stepBody = () => currentStep()?.body as SingleChoiceQuestionStepBodyInterface
-
+    const stepBody = () => currentStep()?.body as ProblemStepBodyInterface
     return (
         <>
             <Show when={stepBody().userAnswers.length !== 0}>
@@ -28,7 +23,7 @@ export const UserAnswerForSingleChoiceQuestionStep: Component = () => {
 }
 
 type UserAnswerProps = {
-    answer: UserAnserForSingleChoiceSuestionStepInterface
+    answer: UserAnswerForProblemStepInterface
 }
 
 const UserAnswer: Component<UserAnswerProps> = (props) => {
@@ -48,7 +43,7 @@ const UserAnswer: Component<UserAnswerProps> = (props) => {
                 <div
                     class={clsx(
                         styles.icon,
-                        props.answer.answer.is_correct ? styles.correct : styles.error,
+                        props.answer.verdict !== 'OK' ? props.answer.verdict === 'PR' ? styles.loading : styles.error : styles.correct,
                     )}
                 >
                     <div class={clsx(styles.outerCircle)}>

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ActionButton, Button, IconPlus } from 'itpolygon-ui-dev'
+import { ActionButton, Button, FileInput, IconPlus } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
 import { For, Show, createSignal } from 'solid-js'
@@ -8,7 +8,6 @@ import * as yup from 'yup'
 import { useResourseStateContext } from '../../../context/universal'
 import type { ProblemStepBodyInterface } from '../../../types/steps'
 import { EditorBlock } from '../../Editor/EditorBlock'
-import { FileInput } from '../../FileInput/FileInput'
 import styles from './ProblemStep.module.scss'
 
 const isRequired = (value?: File) => (value ? true : false)
@@ -136,27 +135,14 @@ export const ProblemStep: Component = () => {
                         currentStep()?.userEnroll?.status !== 'WT'
                     }
                 >
-                    <FileInput name="answer" formHandler={formHandler} />
-                    <Button
-                        value="Ответить"
-                        onClick={() => buttonClick()}
-                        disabled={formHandler.isFormInvalid()}
-                        loading={isLoading()}
-                    />
-                </Show>
-                <Show when={stepBody().userAnswers.length !== 0}>
-                    <div class={clsx(styles.block)}>
-                        <div class={clsx(styles.header)}>Мои решения:</div>
-                        <div class={clsx(styles.answers)}>
-                            <For each={stepBody().userAnswers}>
-                                {(answer) => (
-                                    <div class={clsx(styles.answer)}>
-                                        {answer.id} | {answer.language} | {answer.cpuTime} |{' '}
-                                        {answer.verdict}
-                                    </div>
-                                )}
-                            </For>
-                        </div>
+                    <div class={clsx(styles.row)}>
+                        <FileInput name="answer" formHandler={formHandler} />
+                        <Button
+                            value="Ответить"
+                            onClick={() => buttonClick()}
+                            disabled={formHandler.isFormInvalid()}
+                            loading={isLoading()}
+                        />
                     </div>
                 </Show>
             </div>
