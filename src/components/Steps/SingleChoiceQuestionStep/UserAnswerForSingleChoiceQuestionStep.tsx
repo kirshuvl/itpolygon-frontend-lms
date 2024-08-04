@@ -11,7 +11,7 @@ import type {
 import styles from './UserAnswerForSingleChoiceQuestionStep.module.scss'
 
 export const UserAnswerForSingleChoiceQuestionStep: Component = () => {
-    const { resource, currentStep } = useResourseStateContext()
+    const { currentStep } = useResourseStateContext()
 
     const stepBody = () => currentStep()?.body as SingleChoiceQuestionStepBodyInterface
 
