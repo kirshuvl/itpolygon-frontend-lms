@@ -78,7 +78,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
 
     const [currentStep, setCurrentStep] = createSignal<StepInterface>()
 
-    createEffect(() => {
+    const chooseStep = () => {
         let step = null
         if (params.stepId === undefined) {
             step = resource()?.steps.find(
@@ -96,6 +96,10 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             createUserStepView({ stepId: step?.id })
             setLastUpdate(step?.id)
         }
+    }
+
+    createEffect(() => {
+        chooseStep()
     })
 
     const createUserStepEnroll = async ({ stepId }: { stepId: number }) => {

@@ -34,6 +34,7 @@ export const QuestionStep: Component = () => {
         setIsLoading(true)
         await createUserAnswerForQuestionStep({ answer: formData().answer })
         setIsLoading(false)
+        formHandler.resetForm()
     }
     return (
         <>
