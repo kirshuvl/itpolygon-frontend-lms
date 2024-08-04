@@ -1,4 +1,5 @@
 import type {
+    UserAnserForSingleChoiceSuestionStepInterface,
     UserAnswerForProblemStepInterface,
     UserAnswerForQuestionStepInterface,
     UserStepEnrollInterface,
@@ -43,6 +44,25 @@ export const apiSteps = {
             return response.data
         } catch (error) {
             debugMessage(`[createUserAnswerForQuestionStep] ${error}`)
+            throw error
+        }
+    },
+    createUserAnswerForSingleChoiceQuestionStep: async ({
+        questionId,
+        answerId,
+    }: { questionId: number; answerId: number }): Promise<{
+        answer: UserAnserForSingleChoiceSuestionStepInterface
+        userEnroll: UserStepEnrollInterface
+    }> => {
+        try {
+            const response = await axiosPrivate.post(
+                '/lms/steps/answers/single/',
+                createFormData({ question: questionId, answer: answerId }),
+            )
+
+            return response.data
+        } catch (error) {
+            debugMessage(`[createUserAnswerForSingleChoiceQuestionStep] ${error}`)
             throw error
         }
     },

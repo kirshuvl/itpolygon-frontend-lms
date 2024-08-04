@@ -1,4 +1,4 @@
-import { ActionButton, IconBookmark, IconHeart, IconHeartSolid, TitleBlock } from 'itpolygon-ui-dev'
+import { ActionButton, IconHeart, IconHeartSolid, TitleBlock } from 'itpolygon-ui-dev'
 import { type Component, Match, Show, Switch, createEffect, createSignal, on } from 'solid-js'
 import { ProblemStep } from '../../components/Steps/ProblemStep/ProblemStep'
 import { QuestionStep } from '../../components/Steps/QuestionStep/QuestionStep'
@@ -9,6 +9,8 @@ import { LessonContentSkeleton } from '../../screens/lesson/LessonContentSkeleto
 import { TopicBlockHeaderSkeleton } from '../TopicsBlock/Skeleton/TopicsBlock.Skeleton'
 
 import clsx from 'clsx'
+import { SingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/SingleChoiceQuestionStep'
+import { UserAnswerForSingleChoiceQuestionStep } from '../../components/Steps/SingleChoiceQuestionStep/UserAnswerForSingleChoiceQuestionStep'
 import styles from './CurrentStepBlock.module.scss'
 
 export const CurrentStepBlock: Component = () => {
@@ -47,57 +49,69 @@ export const CurrentStepBlock: Component = () => {
     }
 
     return (
-        <>
-            <TitleBlock
-                title={
-                    <div class={clsx(styles.header)}>
-                        <div>{currentStep()?.title ?? 'Нет заголовка'}</div>
-                        <div class={clsx(styles.buttons)}>
-                            {currentStep()?.liked_by}
-                            <Show
-                                when={currentStep()?.userLike !== null}
-                                fallback={
+        <div class={clsx(styles.column, styles.left)}>
+            <div class={clsx(styles.card)}>
+                <TitleBlock
+                    title={
+                        <div class={clsx(styles.header)}>
+                            <div>{currentStep()?.title ?? 'Нет заголовка'}</div>
+                            <div class={clsx(styles.buttons)}>
+                                <Show
+                                    when={currentStep()?.userLike !== null}
+                                    fallback={
+                                        <ActionButton
+                                            icon={IconHeart}
+                                            iconLoading={IconHeart}
+                                            text={currentStep()?.liked_by}
+                                            loading={isLikeUpdating()}
+                                            onClick={createLike}
+                                            variant="danger"
+                                        />
+                                    }
+                                >
                                     <ActionButton
-                                        icon={IconHeart}
-                                        iconLoading={IconHeart}
+                                        icon={IconHeartSolid}
+                                        iconLoading={IconHeartSolid}
+                                        text={currentStep()?.liked_by}
                                         loading={isLikeUpdating()}
-                                        onClick={createLike}
+                                        onClick={deleteLike}
                                         variant="danger"
                                     />
-                                }
-                            >
-                                <ActionButton
-                                    icon={IconHeartSolid}
-                                    iconLoading={IconHeartSolid}
-                                    loading={isLikeUpdating()}
-                                    onClick={deleteLike}
-                                    variant="danger"
-                                />
-                            </Show>
-                            <ActionButton icon={IconBookmark} />
+                                </Show>
+                            </div>
                         </div>
-                    </div>
-                }
-                loading={resource.loading}
-                fallback={<TopicBlockHeaderSkeleton />}
-            />
-            <Show when={resource.loading}>
-                <LessonContentSkeleton />
+                    }
+                    loading={resource.loading}
+                    fallback={<TopicBlockHeaderSkeleton />}
+                />
+                <Show when={resource.loading}>
+                    <LessonContentSkeleton />
+                </Show>
+                <Switch>
+                    <Match when={currentStep()?.stepType === 'textstep'}>
+                        <TextStep />
+                    </Match>
+                    <Match when={currentStep()?.stepType === 'videostep'}>
+                        <VideoStep />
+                    </Match>
+                    <Match when={currentStep()?.stepType === 'questionstep'}>
+                        <QuestionStep />
+                    </Match>
+                    <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                        <SingleChoiceQuestionStep />
+                    </Match>
+                    <Match when={currentStep()?.stepType === 'problemstep'}>
+                        <ProblemStep />
+                    </Match>
+                </Switch>
+            </div>
+            <Show when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                <Switch>
+                    <Match when={currentStep()?.stepType === 'singlechoicequestionstep'}>
+                        <UserAnswerForSingleChoiceQuestionStep />
+                    </Match>
+                </Switch>
             </Show>
-            <Switch>
-                <Match when={currentStep()?.stepType === 'textstep'}>
-                    <TextStep />
-                </Match>
-                <Match when={currentStep()?.stepType === 'videostep'}>
-                    <VideoStep />
-                </Match>
-                <Match when={currentStep()?.stepType === 'questionstep'}>
-                    <QuestionStep />
-                </Match>
-                <Match when={currentStep()?.stepType === 'problemstep'}>
-                    <ProblemStep />
-                </Match>
-            </Switch>
-        </>
+        </div>
     )
 }
