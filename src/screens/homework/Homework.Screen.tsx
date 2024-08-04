@@ -12,11 +12,7 @@ export const HomeworkScreen: Component = () => {
         <>
             <ResourseProvider pageType="homework">
                 <div class={clsx(styles.dashboard)}>
-                    <div class={clsx(styles.column, styles.left)}>
-                        <div class={clsx(styles.card)}>
-                            <CurrentStepBlock />
-                        </div>
-                    </div>
+                    <CurrentStepBlock />
                     <div class={clsx(styles.column, styles.right)}>
                         <div class={clsx(styles.card, styles.sticky)}>
                             <StepsBlock />
