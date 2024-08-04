@@ -20,13 +20,24 @@ export const StepsBlock: Component = () => {
             })
             .filter((_step, index) => index >= left() && index <= right())
 
+    const leftCheck = () => {
+        const res = resource();
+        return res?.steps && res.steps.length > 6;
+    };
+
+    const rightCheck = () => {
+
+        const res = resource();
+        return res?.steps && right() < res.steps.length;
+    }
+
     return (
         <>
             <TitleBlock
                 title="Шаги"
                 buttons={
                     <>
-                        <Show when={resource()?.steps.length > 6}>
+                        <Show when={leftCheck()}>
                             <ActionButton
                                 icon={IconChevronLeft}
                                 onClick={() => {
@@ -40,7 +51,7 @@ export const StepsBlock: Component = () => {
                             <ActionButton
                                 icon={IconChevronRight}
                                 onClick={() => {
-                                    if (right() < resource()?.steps.length) {
+                                    if (rightCheck()) {
                                         setLeft(() => left() + 6)
                                         setRight(() => right() + 6)
                                     }
