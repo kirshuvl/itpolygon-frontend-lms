@@ -247,7 +247,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             if (step) {
                 const stepBody = step?.body as ProblemStepBodyInterface
                 if (stepBody.userAnswers) {
-                    stepBody.userAnswers.push(userAnswerForProblemStep)
+                    stepBody.userAnswers.unshift(userAnswerForProblemStep)
                 } else {
                     stepBody.userAnswers = [userAnswerForProblemStep]
                 }

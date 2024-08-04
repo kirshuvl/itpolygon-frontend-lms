@@ -69,6 +69,12 @@ export interface ProblemStepBodyInterface {
     cpuTime: number
     memody: number
     userAnswers: UserAnswerForProblemStepInterface[]
+    stepTests: {
+        id: number
+        number: number
+        input: string
+        output: string
+    }[]
 }
 
 export interface UserAnswerForQuestionStepInterface {
@@ -83,5 +89,6 @@ export interface UserAnswerForProblemStepInterface {
     id: number
     language: string
     verdict: string
-    cputime: number
+    cpuTime: number
+    created_at: Date
 }

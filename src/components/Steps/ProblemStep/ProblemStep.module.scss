@@ -15,3 +15,41 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+.tests {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.test {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width: 50%;
+    background-color: var(--slate-50);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    white-space: pre-wrap;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--slate-100);
+    }
+}
+
+.answers {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.answer {
+    background-color: var(--slate-100);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
