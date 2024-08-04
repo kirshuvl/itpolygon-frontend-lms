@@ -12,10 +12,10 @@ export interface StepInterface {
         id: number
     } | null
     body:
-    | TextStepBodyInterface
-    | VideoStepBodyInterface
-    | QuestionStepBodyInterface
-    | ProblemStepBodyInterface
+        | TextStepBodyInterface
+        | VideoStepBodyInterface
+        | QuestionStepBodyInterface
+        | ProblemStepBodyInterface
 }
 
 export interface UserStepEnrollInterface {

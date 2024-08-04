@@ -115,7 +115,6 @@ export const CurrentStepBlock: Component = () => {
                     <UserAnswerForProblemStep />
                 </Match>
             </Switch>
-
         </div>
     )
 }

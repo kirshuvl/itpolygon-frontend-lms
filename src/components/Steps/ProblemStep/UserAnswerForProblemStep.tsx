@@ -43,7 +43,11 @@ const UserAnswer: Component<UserAnswerProps> = (props) => {
                 <div
                     class={clsx(
                         styles.icon,
-                        props.answer.verdict !== 'OK' ? props.answer.verdict === 'PR' ? styles.loading : styles.error : styles.correct,
+                        props.answer.verdict !== 'OK'
+                            ? props.answer.verdict === 'PR'
+                                ? styles.loading
+                                : styles.error
+                            : styles.correct,
                     )}
                 >
                     <div class={clsx(styles.outerCircle)}>
