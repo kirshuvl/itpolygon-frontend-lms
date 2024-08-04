@@ -21,14 +21,13 @@ export const StepsBlock: Component = () => {
             .filter((_step, index) => index >= left() && index <= right())
 
     const leftCheck = () => {
-        const res = resource();
-        return res?.steps && res.steps.length > 6;
-    };
+        const res = resource()
+        return res?.steps && res.steps.length > 6
+    }
 
     const rightCheck = () => {
-
-        const res = resource();
-        return res?.steps && right() < res.steps.length;
+        const res = resource()
+        return res?.steps && right() < res.steps.length
     }
 
     return (

@@ -7,14 +7,17 @@ export const LessonProgress: Component = () => {
     const [percent, setPercent] = createSignal(0)
 
     createEffect(() => {
-        const res = resource();
+        const res = resource()
         if (res?.steps) {
-            setPercent((res.steps.filter((step) => step.userEnroll?.status === 'OK').length / res.steps.length) * 100);
+            setPercent(
+                (res.steps.filter((step) => step.userEnroll?.status === 'OK').length / res.steps.length) *
+                    100,
+            )
         }
     })
     return (
         <div>
-            { }
+            {}
             <ProgressBarHorizontal percent={percent()} />
         </div>
     )
