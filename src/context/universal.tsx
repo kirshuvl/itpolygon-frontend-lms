@@ -57,6 +57,7 @@ type ResourseProviderType = {
 export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) => {
     const params = useParams<{ resourceId: string; stepId?: string }>()
 
+    const url = props.pageType
     const [lastUpdate, setLastUpdate] = createSignal()
 
     const fetchResource = ({
@@ -77,7 +78,6 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
     >({ resourseId: params.resourceId }, fetchResource)
 
     const [currentStep, setCurrentStep] = createSignal<StepInterface>()
-
     const chooseStep = () => {
         let step = null
         if (params.stepId === undefined) {
@@ -98,8 +98,8 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         }
     }
 
-    createEffect(() => {
-        chooseStep()
+    onMount(() => {
+        createEffect(() => chooseStep())
     })
 
     const createUserStepEnroll = async ({ stepId }: { stepId: number }) => {
@@ -113,7 +113,6 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         })
         mutateResource(newResourse)
     }
-
     const updateUserStepEnroll = async ({ status }: { status: string }) => {
         // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const enrollId = currentStep()?.userEnroll?.id!
@@ -263,7 +262,6 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         mutateResource(newResourse)
     }
 
-    const url = props.pageType
     const value = {
         resource,
         url,
