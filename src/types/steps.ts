@@ -39,6 +39,27 @@ export interface QuestionStepBodyInterface {
     userAnswers: UserAnswerForQuestionStepInterface[]
 }
 
+export interface UserAnserForSingleChoiceSuestionStepInterface {
+    id: number
+    answer: {
+        id: number
+        answer: string
+        is_correct: boolean
+    }
+    created_at: Date
+}
+
+export interface SingleChoiceQuestionStepBodyInterface {
+    id: number
+    text: EditorDataInterface
+    stepAnswers: {
+        id: number
+        answer: string
+        is_correct: boolean
+    }[]
+    userAnswers: UserAnserForSingleChoiceSuestionStepInterface[]
+}
+
 export interface ProblemStepBodyInterface {
     id: number
     text: EditorDataInterface

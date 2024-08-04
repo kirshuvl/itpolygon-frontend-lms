@@ -20,7 +20,12 @@ import { apiSteps } from '../api/apiSteps'
 import type { HomeworkInterface } from '../types/homeworks'
 import type { LessonInterface } from '../types/lessons'
 import type { SeminarInterface } from '../types/seminars'
-import type { ProblemStepBodyInterface, QuestionStepBodyInterface, StepInterface } from '../types/steps'
+import type {
+    ProblemStepBodyInterface,
+    QuestionStepBodyInterface,
+    SingleChoiceQuestionStepBodyInterface,
+    StepInterface,
+} from '../types/steps'
 import { debugMessage } from '../utils/debugMessage'
 
 type ResourseContextType<T> = {
@@ -37,6 +42,7 @@ type ResourseContextType<T> = {
         deleteUserStepLike: ({ stepId, userStepLikeId }: { stepId: number; userStepLikeId: number }) => void
         updateUserStepEnroll: ({ status }: { status: string }) => void
         createUserAnswerForQuestionStep: ({ answer }: { answer: string }) => void
+        createUserAnswerForSingleChoiceQuestionStep: ({ answerId }: { answerId: number }) => void
         createUserAnswerForProblemStep: ({ code }: { code: string }) => void
     }
 }
@@ -195,6 +201,36 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
         mutateResource(newResourse)
     }
 
+    const createUserAnswerForSingleChoiceQuestionStep = async ({ answerId }: { answerId: number }) => {
+        const stepId = currentStep()?.id
+        if (stepId) {
+            const answer = await apiSteps.createUserAnswerForSingleChoiceQuestionStep({
+                questionId: stepId,
+                answerId: answerId,
+            })
+
+            const userEnroll = answer.userEnroll
+            const userAnswer = answer.answer
+
+            const newResourse = produce(resource(), (draftState) => {
+                const step = draftState?.steps.find((step) => step.id === stepId)
+
+                if (step) {
+                    const stepBody = step?.body as SingleChoiceQuestionStepBodyInterface
+                    if (stepBody.userAnswers) {
+                        stepBody.userAnswers.unshift(userAnswer)
+                    } else {
+                        stepBody.userAnswers = [userAnswer]
+                    }
+
+                    step.userEnroll = userEnroll
+                    step.body = stepBody
+                }
+            })
+            mutateResource(newResourse)
+        }
+    }
+
     const createUserAnswerForProblemStep = async ({ code }: { code: string }) => {
         // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const stepId = currentStep()?.id!
@@ -238,6 +274,7 @@ export const ResourseProvider: ParentComponent<ResourseProviderType> = (props) =
             deleteUserStepLike,
             updateUserStepEnroll,
             createUserAnswerForQuestionStep,
+            createUserAnswerForSingleChoiceQuestionStep,
             createUserAnswerForProblemStep,
         },
     }

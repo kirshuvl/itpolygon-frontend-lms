@@ -2,7 +2,7 @@ import { A } from '@solidjs/router'
 import clsx from 'clsx'
 import { Button } from 'itpolygon-ui-dev'
 import { TitleBlock } from 'itpolygon-ui-dev'
-import { InputField } from 'itpolygon-ui-dev'
+import { TextInput } from 'itpolygon-ui-dev'
 import { useFormHandler } from 'solid-form-handler'
 import { yupSchema } from 'solid-form-handler/yup'
 import { type Component, onCleanup, onMount } from 'solid-js'
@@ -49,13 +49,13 @@ export const LoginScreen: Component = () => {
                 </div>
                 <div class={clsx(styles.card)}>
                     <TitleBlock title="Войти в аккаунт" />
-                    <InputField
+                    <TextInput
                         type="text"
                         placeholder="Введите Email"
                         name="email"
                         formHandler={formHandler}
                     />
-                    <InputField
+                    <TextInput
                         type="password"
                         placeholder="Введите пароль"
                         name="password"
