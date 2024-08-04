@@ -8,7 +8,6 @@ import * as yup from 'yup'
 import { useResourseStateContext } from '../../../context/universal'
 import type { QuestionStepBodyInterface } from '../../../types/steps'
 import { EditorBlock } from '../../Editor/EditorBlock'
-import { UserAnswerCard } from '../../UserAnswerCard/UserAnswerCard'
 import styles from './QuestionStep.module.scss'
 
 type UserAnswer = {
@@ -56,9 +55,6 @@ export const QuestionStep: Component = () => {
                         />
                     </div>
                 </Show>
-            </div>
-            <div>
-                <For each={stepBody()?.userAnswers}>{(answer) => <UserAnswerCard answer={answer} />}</For>
             </div>
         </>
     )

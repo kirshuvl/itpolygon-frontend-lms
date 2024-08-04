@@ -12,10 +12,10 @@ export interface StepInterface {
         id: number
     } | null
     body:
-        | TextStepBodyInterface
-        | VideoStepBodyInterface
-        | QuestionStepBodyInterface
-        | ProblemStepBodyInterface
+    | TextStepBodyInterface
+    | VideoStepBodyInterface
+    | QuestionStepBodyInterface
+    | ProblemStepBodyInterface
 }
 
 export interface UserStepEnrollInterface {
@@ -83,6 +83,7 @@ export interface UserAnswerForQuestionStepInterface {
     question: number
     answer: string
     is_correct: boolean
+    created_at: Date
 }
 
 export interface UserAnswerForProblemStepInterface {
