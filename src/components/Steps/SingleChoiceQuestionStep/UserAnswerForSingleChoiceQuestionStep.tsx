@@ -31,9 +31,7 @@ type UserAnswerProps = {
     answer: UserAnserForSingleChoiceSuestionStepInterface
 }
 
-
 const UserAnswer: Component<UserAnswerProps> = (props) => {
-
     const date = new Date(props.answer.created_at)
 
     const day = String(date.getDate()).padStart(2, '0')
